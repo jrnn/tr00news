@@ -1,0 +1,13 @@
+Just a rough backlog for listing requirements and breaking them down into concrete tasks ...
+
+[REQUIREMENTS]
+  [ ] setting up deployment pipeline (GitHub > Travis > Heroku)
+  [ ] adding news articles
+  [ ] editing news articles
+  [ ] adding authors
+  [ ] adding categories
+  [ ] assigning authors and categories to news articles
+  [ ] listing five latest news articles on landing page
+  [ ] viewing individual news article
+  [ ] ...
+  [ ] ...
