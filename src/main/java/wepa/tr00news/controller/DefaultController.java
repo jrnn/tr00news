@@ -12,7 +12,9 @@ public class DefaultController {
     public String handleDefault() {
         return "This is the water, and this is the well.<br/>" +
                 "Drink full, and descend.<br/>" +
-                "The horse is the white of the eyes, and dark within.<br/>";
+                "The horse is the white of the eyes, and dark within.<br/>" +
+                "...<br/>" +
+                "Got a light?<br/>";
     }
 
 }

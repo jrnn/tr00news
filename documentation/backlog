@@ -8,7 +8,7 @@ user stories and concrete tasks, and keeping track of progress ...
 [REQUIREMENTS]
 
   [X] [171201] setting up deployment pipeline (GitHub > Travis > Heroku)
-  [ ] [      ] adding news articles
+  [X] [171201] adding news articles
   [ ] [      ] editing news articles
   [ ] [      ] adding authors
   [ ] [      ] adding categories
@@ -26,12 +26,12 @@ ________________________________________________________________________________
 #001# "As admin, I can add news articles, so that this thing makes any sense to
        begin with."
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
-  [ ] create HTML template with form for POSTing an Article
+  [X] create HTML template with form for POSTing an Article
   [X] create entity and repository "Article"
   [X] create entity and repository "FileObject" (i.e. pictures attached to
       Articles)
-  [ ] create service "ArticleService" with method for saving an Article
-  [ ] create controller "ArticleController" handling POST requests to
+  [X] create service "ArticleService" with method for saving an Article
+  [X] create controller "ArticleController" handling GET and POST requests to
       "/admin/articles"
 
 ________________________________________________________________________________
