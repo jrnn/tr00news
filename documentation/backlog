@@ -1,13 +1,47 @@
-Just a rough backlog for listing requirements and breaking them down into concrete tasks ...
+[WHAT IS THIS S**T?]
+
+This is just a rough backlog for listing requirements, breaking them down into
+user stories and concrete tasks, and keeping track of progress ...
+
+
 
 [REQUIREMENTS]
-  [ ] setting up deployment pipeline (GitHub > Travis > Heroku)
-  [ ] adding news articles
-  [ ] editing news articles
-  [ ] adding authors
-  [ ] adding categories
-  [ ] assigning authors and categories to news articles
-  [ ] listing five latest news articles on landing page
-  [ ] viewing individual news article
+
+  [X] [171201] setting up deployment pipeline (GitHub > Travis > Heroku)
+  [ ] [      ] adding news articles
+  [ ] [      ] editing news articles
+  [ ] [      ] adding authors
+  [ ] [      ] adding categories
+  [ ] [      ] assigning authors and categories to news articles
+  [ ] [      ] listing five latest news articles on landing page
+  [ ] [      ] viewing individual news article
+  [ ] [      ] ...
+  [ ] [      ] ...
+
+
+
+[STORIES / TASKS]
+
+________________________________________________________________________________
+#001# "As admin, I can add news articles, so that this thing makes any sense to
+       begin with."
+‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+  [ ] create HTML template with form for POSTing an Article
+  [X] create entity and repository "Article"
+  [X] create entity and repository "FileObject" (i.e. pictures attached to
+      Articles)
+  [ ] create service "ArticleService" with method for saving an Article
+  [ ] create controller "ArticleController" handling POST requests to
+      "/admin/articles"
+
+________________________________________________________________________________
+#002# "As admin, I can edit news articles, so that typos and/or misinformation
+       can be dealt with."
+‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
   [ ] ...
   [ ] ...
+  [ ] ...
+
+
+
+################################################################################
