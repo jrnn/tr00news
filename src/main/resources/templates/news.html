@@ -11,11 +11,13 @@
         <h1>Heavily under construction...</h1>
 
         <h2>Latest news</h2>
-        <div th:each="article : ${articles}">
-            <h4 th:text="${article.headline}">Headline</h4>
+        <section th:each="article : ${articles}">
+            <a th:href="@{/admin/articles/{id}/(id=${article.id})}">
+                <h3 th:text="${article.headline}">Headline</h3>
+            </a>
             <img th:src="@{/articles/{id}/picture(id=${article.id})}"/>
             <p th:text="${article.lead}">Lead paragraph</p>
-        </div>
+        </section>
 
     </body>
 

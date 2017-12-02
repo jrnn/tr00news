@@ -1,63 +1,72 @@
-[WHAT IS THIS S**T?]
+‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+WHAT IS THIS S**T?
+________________________________________________________________________________
 
 This is just a rough backlog for listing requirements, breaking them down into
-user stories and concrete tasks, and keeping track of progress ...
+concrete tasks, and trying to keep track of progress ...
 
 
 
-[REQUIREMENTS]
+‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+REQUIREMENTS
+________________________________________________________________________________
 
   [X] [171201] setting up deployment pipeline (GitHub > Travis > Heroku)
   [X] [171201] adding news articles
-  [ ] [      ] editing news articles
+  [X] [171202] editing news articles
   [ ] [      ] adding authors
   [ ] [      ] adding categories
   [ ] [      ] assigning authors and categories to news articles
-  [ ] [      ] listing five latest news articles on landing page
+  [X] [171202] listing five latest news articles on landing page
   [ ] [      ] viewing individual news article
+  [ ] [      ] navigation bar incl. categories
   [ ] [      ] ...
+  [ ] [      ] tracking clicks per article
   [ ] [      ] ...
 
 
 
-[STORIES / TASKS]
-
-________________________________________________________________________________
-#001# "As admin, I can add news articles, so that this thing makes any sense to
-       begin with."
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
-  [X] create HTML template with form for POSTing an Article
-  [X] create entity and repository "Article"
-  [X] create entity and repository "FileObject" (i.e. pictures attached to
-      Articles)
-  [X] create service "ArticleService" with method for saving an Article
-  [X] create controller "ArticleController" handling GET and POST requests to
-      "/admin/articles"
-
+STORIES / TASKS BREAKDOWN
 ________________________________________________________________________________
-#002# "As reader, I can immediately see what's latest news, so that I can get a
-       rough idea of what's going on at a quick glance."
+
+[001] "As admin, I can add news articles, so that ..."
+
+  [X] create "article.html" with form for posting an Article
+  [X] create entities and repositories for "Article", "Picture"
+  [X] "ArticleController" handles GET and POST requests to "/admin/articles"
+  [X] "ArticleService" validates and saves Articles (with Pictures)
+  [X] "PictureService" handles inbound Pictures and, in case of invalid input,
+      provides a placeholder picture instead
+  [ ] ...
+
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
-  [X] create HTML template for landing page that lists Articles (minus running
-      text) in order of publishing date, latest on top
-  [X] create "NewsController" and "NewsService" for handling GET requests to
-      "/news" and fetching Articles from database
-  [X] create "FileObjectController" for handling GET requests to "/articles/{id}
-      /picture" for viewing Article pictures
-  [X] limit to only 5 latest Articles
-  [ ] figure out how to make the page NOT look like s**t ...
-  [ ] ...
+[002] "As reader, I can see what's latest news right on the landing page, so
+      that ..."
+
+  [X] create "news.html" listing Articles (show headline, lead, and picture)
+  [X] "NewsController" handles GET requests to "/news"
+  [X] "ArticleController" handles GET requests to "/articles/{id}/picture" (for
+      viewing Pictures)
+  [X] <???> ... show only 5 latest Articles in descending order
   [ ] ...
 
-________________________________________________________________________________
-#003# "As admin, I can edit news articles, so that typos and/or misinformation
-       can be dealt with."
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
-  [ ] ...
-  [ ] ...
+[003] "As admin, I can edit news articles, so that ..."
+
+  [X] extend "article.html" with prefilled form for editing and posting an
+      existing Article
+  [X] "ArticleController" handles GET and POST requests to "/admin/articles
+      /{articleId}"
+  [X] "ArticleService" updates existing Articles (incl. Picture replacement)
   [ ] ...
 
+‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+[004] "As ..., I can ..., so that ..."
 
+  [ ] ...
+  [ ] ...
+  [ ] ...
 
 
 

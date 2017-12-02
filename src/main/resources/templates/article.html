@@ -3,26 +3,50 @@
 
     <head lang="en">
         <meta charset="UTF-8" />
-        <title>tr00news | Add/edit article</title>
+        <title>tr00news | add / edit article</title>
     </head>
 
     <body>
 
         <h1>Heavily under construction...</h1>
 
-        <h2>Add article</h2>
-        <div th:if="${article == null}">
-            <form method="POST" th:action="@{/admin/articles}" enctype="multipart/form-data">
-                Headline:<br/>
-                <input type="text" name="headline" id="headline" required/><br/>
-                Lead paragraph:<br/>
-                <textarea name="lead" id="lead" wrap="soft" required></textarea><br/>
-                Running text:<br/>
-                <textarea name="body" id="body" wrap="soft" required></textarea><br/>
-                Picture: <input type="file" name="pic" id="pic" required/><br/>
-                <input type="submit" value="Add"/>
-            </form>
-        </div>
+        <section th:if="${article == null}">
+            <h2>Add article</h2>
+
+            <div>
+                <form method="POST" th:action="@{/admin/articles}" enctype="multipart/form-data">
+                    Headline:<br/>
+                    <input type="text" name="headline" id="headline" required/><br/>
+                    Lead paragraph:<br/>
+                    <textarea name="lead" id="lead" wrap="soft" required></textarea><br/>
+                    Running text:<br/>
+                    <textarea name="body" id="body" wrap="soft" required></textarea><br/>
+                    Picture: <input type="file" name="pic" id="pic" required/><br/>
+                    <input type="submit" value="Add"/>
+                </form>
+            </div>
+        </section>
+
+        <section th:if="${article != null}">
+            <h2>Edit article</h2>
+
+            <div>
+                <form method="POST" th:action="@{/admin/articles/{id}(id=${article.id})}" enctype="multipart/form-data">
+                    Headline:<br/>
+                    <input type="text" name="headline" id="headline" th:value="${article.headline}" required/><br/>
+                    Lead paragraph:<br/>
+                    <textarea name="lead" id="lead" wrap="soft" th:text="${article.lead}" required></textarea><br/>
+                    Running text:<br/>
+                    <textarea name="body" id="body" wrap="soft" th:text="${article.body}" required></textarea><br/>
+                    Replace picture: <input type="file" name="pic" id="pic"/><br/>
+                    <input type="submit" value="Update"/>
+                </form>
+            </div>
+            <div>
+                Current picture:<br/>
+                <img th:src="@{/articles/{id}/picture(id=${article.id})}"/>
+            </div>
+        </section>
 
     </body>
 

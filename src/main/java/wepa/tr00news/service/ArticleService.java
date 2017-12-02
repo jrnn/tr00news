@@ -25,11 +25,39 @@ public class ArticleService {
         a = this.trimArticle(a);
         a.setPublishedOn(LocalDateTime.now());
 
-        Picture p = this.pictureService.convertPicture(f);
+        Picture p = this.pictureService.convertToPicture(f);
+
+        if (p == null) {
+            p = this.pictureService.getDefaultPicture();
+        }
+
+        p.setArticle(a);
+        p = this.pictureRepo.save(p);
+        a.setPicture(p);
+
+        return this.articleRepo.save(a);
+    }
+
+    @Transactional
+    public Article update(Long id, Article aNew, MultipartFile f) {
+        Article a = this.articleRepo.getOne(id);
+
+        if (a == null) {
+            return this.save(aNew, f);
+        }
+
+        aNew = this.trimArticle(aNew);
+        a.setHeadline(aNew.getHeadline());
+        a.setLead(aNew.getLead());
+        a.setBody(aNew.getBody());
+
+        Picture p = this.pictureService.convertToPicture(f);
 
         if (p != null) {
             p.setArticle(a);
             p = this.pictureRepo.save(p);
+
+            this.pictureRepo.delete(a.getPicture());
             a.setPicture(p);
         }
 

@@ -12,11 +12,11 @@ import wepa.tr00news.repository.ArticleRepository;
 public class NewsController {
 
     @Autowired
-    private ArticleRepository articles;
+    private ArticleRepository articleRepo;
 
     @GetMapping("/news")
     public String get(Model m) {
-        m.addAttribute("articles", this.articles.findAll(
+        m.addAttribute("articles", this.articleRepo.findAll(
                 PageRequest.of(0, 5, Sort.Direction.DESC, "publishedOn")
         ));
 
