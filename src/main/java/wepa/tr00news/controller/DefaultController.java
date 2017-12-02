@@ -10,13 +10,16 @@ public class DefaultController {
     @RequestMapping("*")
     @ResponseBody
     public String handleDefault() {
-        return "This is the water, and this is the well.<br/>" +
-                "Drink full, and descend.<br/>" +
-                "The horse is the white of the eyes, and dark within.<br/>" +
-                "...<br/>" +
-                "Got a light?<br/>" +
-                "...<br/>" +
-                "Got a light?<br/>";
+        StringBuilder sb = new StringBuilder();
+        sb.append("This is the water, and this is the well.</br>")
+                .append("Drink full, and descend.<br/>")
+                .append("The horse is the white of the eyes, and dark within.<br/>");
+
+        for (int i = 0; i < 3; i ++) {
+            sb.append("...<br/>Got a light?<br/>");
+        }
+
+        return sb.toString();
     }
 
 }

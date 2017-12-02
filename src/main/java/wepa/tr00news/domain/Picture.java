@@ -14,7 +14,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class FileObject extends AbstractPersistable<Long> {
+public class Picture extends AbstractPersistable<Long> {
 
     @Lob
     private byte[] content;

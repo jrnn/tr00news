@@ -8,16 +8,23 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import wepa.tr00news.repository.ArticleRepository;
 
 @Controller
-public class FileObjectController {
+public class PictureController {
 
     @Autowired
-    private ArticleRepository repo;
+    private ArticleRepository articleRepo;
 
     @GetMapping(path = "/articles/{id}/picture",
             produces = {"image/jpg", "image/jpeg", "image/png", "image/gif"})
     @ResponseBody
-    public byte[] get(@PathVariable Long id) {
-        return this.repo.getOne(id).getPicture().getContent();
+    public byte[] get(@PathVariable String id) {
+        try {
+            return this.articleRepo
+                    .getOne(Long.parseLong(id))
+                    .getPicture().getContent();
+        } catch (NumberFormatException e) {
+        }
+
+        return null;
     }
 
 }

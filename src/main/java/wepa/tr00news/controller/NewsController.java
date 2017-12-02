@@ -20,7 +20,7 @@ public class NewsController {
                 PageRequest.of(0, 5, Sort.Direction.DESC, "publishedOn")
         ));
 
-        return "landing";
+        return "news";
     }
 
 }

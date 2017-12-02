@@ -21,6 +21,6 @@ public class Article extends AbstractPersistable<Long> {
     private LocalDateTime publishedOn;
 
     @OneToOne(mappedBy = "article", fetch = FetchType.LAZY)
-    private FileObject picture;
+    private Picture picture;
 
 }

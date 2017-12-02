@@ -1,46 +1,57 @@
 package wepa.tr00news.service;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import wepa.tr00news.domain.Article;
-import wepa.tr00news.domain.FileObject;
+import wepa.tr00news.domain.Picture;
 import wepa.tr00news.repository.ArticleRepository;
-import wepa.tr00news.repository.FileObjectRepository;
+import wepa.tr00news.repository.PictureRepository;
 
 @Service
 public class ArticleService {
 
     @Autowired
-    private ArticleRepository articles;
+    private ArticleRepository articleRepo;
     @Autowired
-    private FileObjectRepository fileObjects;
+    private PictureRepository pictureRepo;
+    @Autowired
+    private PictureService pictureService;
 
     @Transactional
-    public Article save(
-            MultipartFile pic,
-            String headline,
-            String lead,
-            String body
-    ) throws IOException
-    {
-        Article a = new Article();
-        a.setHeadline(headline);
-        a.setLead(lead);
-        a.setBody(body);
+    public Article save(Article a, MultipartFile f) {
+        a = this.trimArticle(a);
         a.setPublishedOn(LocalDateTime.now());
-        a = this.articles.save(a);
 
-        FileObject f = new FileObject();
-        f.setContent(pic.getBytes());
-        f.setArticle(a);
-        f = this.fileObjects.save(f);
+        Picture p = this.pictureService.convertPicture(f);
 
-        a.setPicture(f);
-        return this.articles.save(a);
+        if (p != null) {
+            p.setArticle(a);
+            p = this.pictureRepo.save(p);
+            a.setPicture(p);
+        }
+
+        return this.articleRepo.save(a);
+    }
+
+    private Article trimArticle(Article a) {
+        a.setHeadline(a.getHeadline().trim());
+        a.setLead(a.getLead().trim());
+        a.setBody(a.getBody().trim());
+
+        if (a.getHeadline().isEmpty()) {
+            a.setHeadline("[Headline missing!]");
+        }
+        if (a.getLead().isEmpty()) {
+            a.setLead("[Lead paragraph missing!]");
+        }
+        if (a.getBody().isEmpty()) {
+            a.setBody("[Running text missing!]");
+        }
+
+        return a;
     }
 
 }

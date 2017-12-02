@@ -1,6 +1,5 @@
 package wepa.tr00news.controller;
 
-import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,28 +15,19 @@ import wepa.tr00news.service.ArticleService;
 public class ArticleController {
 
     @Autowired
-    private ArticleService articles;
+    private ArticleService articleService;
 
     @GetMapping("/admin/articles")
-    public String get(Model m) {
-        return "add";
+    public String get(Model model) {
+        return "article";
     }
 
     @PostMapping("/admin/articles")
     public String post(
-            @RequestParam(value = "pic", required = true) MultipartFile pic,
-            @RequestParam(required = true) String headline,
-            @RequestParam(required = true) String lead,
-            @RequestParam(required = true) String body
-    ) throws IOException
-    {
-        if (!headline.trim().isEmpty() &&
-                !lead.trim().isEmpty() &&
-                !body.trim().isEmpty() &&
-                pic.getContentType().contains("image"))
-        {
-            this.articles.save(pic, headline.trim(), lead.trim(), body.trim());
-        }
+            @ModelAttribute Article a,
+            @RequestParam(value = "pic") MultipartFile f
+    ) {
+        this.articleService.save(a, f);
 
         return "redirect:/admin/articles";
     }
