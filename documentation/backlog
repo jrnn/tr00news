@@ -35,12 +35,29 @@ ________________________________________________________________________________
       "/admin/articles"
 
 ________________________________________________________________________________
-#002# "As admin, I can edit news articles, so that typos and/or misinformation
+#002# "As reader, I can immediately see what's latest news, so that I can get a
+       rough idea of what's going on at a quick glance."
+‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+  [X] create HTML template for landing page that lists Articles (minus running
+      text) in order of publishing date, latest on top
+  [X] create "NewsController" and "NewsService" for handling GET requests to
+      "/news" and fetching Articles from database
+  [X] create "FileObjectController" for handling GET requests to "/articles/{id}
+      /picture" for viewing Article pictures
+  [X] limit to only 5 latest Articles
+  [ ] figure out how to make the page NOT look like s**t ...
+  [ ] ...
+  [ ] ...
+
+________________________________________________________________________________
+#003# "As admin, I can edit news articles, so that typos and/or misinformation
        can be dealt with."
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
   [ ] ...
   [ ] ...
   [ ] ...
+
+
 
 
 

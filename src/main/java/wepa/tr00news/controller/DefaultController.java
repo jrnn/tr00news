@@ -14,6 +14,8 @@ public class DefaultController {
                 "Drink full, and descend.<br/>" +
                 "The horse is the white of the eyes, and dark within.<br/>" +
                 "...<br/>" +
+                "Got a light?<br/>" +
+                "...<br/>" +
                 "Got a light?<br/>";
     }
 
