@@ -1,48 +1,37 @@
 package wepa.tr00news.service;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import wepa.tr00news.domain.Picture;
+import wepa.tr00news.repository.PictureRepository;
 
 @Service
 public class PictureService {
 
-    private static final String DEFAULT_PICTURE_URL =
-            "https://www.cs.helsinki.fi/u/jjuurine/default.jpg";
+    @Autowired
+    private PictureRepository pictureRepository;
 
-    public Picture convertToPicture(MultipartFile f) {
-        try {
-            if (f.getContentType().contains("image") && f.getSize() > 0) {
-                Picture p = new Picture();
-                p.setContent(f.getBytes());
+    public Picture savePicture(MultipartFile file) {
+        Picture picture = convertToPicture(file);
 
-                return p;
-            }
-        } catch (IOException e) {
+        if (picture == null) {
+            return null;
         }
 
-        return null;
+        return pictureRepository.save(picture);
     }
 
-    public Picture getDefaultPicture() {
-        try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
-            byte[] b = new byte[4096];
-            int bytesRead;
-            InputStream is = new URL(DEFAULT_PICTURE_URL).openStream();
+    public Picture convertToPicture(MultipartFile file) {
+        try {
+            if (file.getContentType().contains("image") && file.getSize() > 0) {
+                Picture picture = new Picture();
+                picture.setContent(file.getBytes());
 
-            while ((bytesRead = is.read(b)) > 0) {
-                baos.write(b, 0, bytesRead);
+                return picture;
             }
-
-            Picture p = new Picture();
-            p.setContent(baos.toByteArray());
-
-            return p;
-        } catch (Exception e) {
+        } catch (IOException e) {
         }
 
         return null;

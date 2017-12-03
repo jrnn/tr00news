@@ -12,10 +12,11 @@
 
         <h2>Latest news</h2>
         <section th:each="article : ${articles}">
-            <a th:href="@{/admin/articles/{id}/(id=${article.id})}">
+            <a th:href="@{/articles/{id}/(id=${article.id})}">
                 <h3 th:text="${article.headline}">Headline</h3>
             </a>
-            <img th:src="@{/articles/{id}/picture(id=${article.id})}"/>
+            <img th:if='${article.picture} != null' th:src="@{/articles/{id}/picture(id=${article.id})}"/><br/>
+            <img th:if='${article.picture} == null' th:src="@{/img/default.png}"/><br/>
             <p th:text="${article.lead}">Lead paragraph</p>
         </section>
 

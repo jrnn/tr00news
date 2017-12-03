@@ -3,6 +3,8 @@ package wepa.tr00news.domain;
 import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,6 +16,10 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @AllArgsConstructor
 @Data
 public class Article extends AbstractPersistable<Long> {
+
+    @Id
+    @GeneratedValue
+    private Long id;
 
     private String headline;
     private String lead;

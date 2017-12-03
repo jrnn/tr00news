@@ -14,15 +14,15 @@
             <h2>Add article</h2>
 
             <div>
-                <form method="POST" th:action="@{/admin/articles}" enctype="multipart/form-data">
+                <form method="POST" th:action="@{/articles}" enctype="multipart/form-data">
                     Headline:<br/>
                     <input type="text" name="headline" id="headline" required/><br/>
                     Lead paragraph:<br/>
                     <textarea name="lead" id="lead" wrap="soft" required></textarea><br/>
                     Running text:<br/>
                     <textarea name="body" id="body" wrap="soft" required></textarea><br/>
-                    Picture: <input type="file" name="pic" id="pic" required/><br/>
-                    <input type="submit" value="Add"/>
+                    Picture: <input type="file" name="file" id="file" required/><br/>
+                    <input type="submit" value="Add new article"/>
                 </form>
             </div>
         </section>
@@ -31,20 +31,21 @@
             <h2>Edit article</h2>
 
             <div>
-                <form method="POST" th:action="@{/admin/articles/{id}(id=${article.id})}" enctype="multipart/form-data">
+                <form method="POST" th:action="@{/articles/{id}(id=${article.id})}" enctype="multipart/form-data">
                     Headline:<br/>
                     <input type="text" name="headline" id="headline" th:value="${article.headline}" required/><br/>
                     Lead paragraph:<br/>
                     <textarea name="lead" id="lead" wrap="soft" th:text="${article.lead}" required></textarea><br/>
                     Running text:<br/>
                     <textarea name="body" id="body" wrap="soft" th:text="${article.body}" required></textarea><br/>
-                    Replace picture: <input type="file" name="pic" id="pic"/><br/>
-                    <input type="submit" value="Update"/>
+                    Replace picture: <input type="file" name="file" id="file"/><br/>
+                    <input type="submit" value="Update article"/>
                 </form>
             </div>
             <div>
                 Current picture:<br/>
-                <img th:src="@{/articles/{id}/picture(id=${article.id})}"/>
+                <img th:if='${article.picture} != null' th:src="@{/articles/{id}/picture(id=${article.id})}"/><br/>
+                <img th:if='${article.picture} == null' th:src="@{/img/default.png}"/><br/>
             </div>
         </section>
 

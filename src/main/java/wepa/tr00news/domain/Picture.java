@@ -2,6 +2,8 @@ package wepa.tr00news.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.OneToOne;
@@ -15,6 +17,10 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @AllArgsConstructor
 @Data
 public class Picture extends AbstractPersistable<Long> {
+
+    @Id
+    @GeneratedValue
+    private Long id;
 
     @Lob
     private byte[] content;

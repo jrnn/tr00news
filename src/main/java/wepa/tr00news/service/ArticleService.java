@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 import wepa.tr00news.domain.Article;
 import wepa.tr00news.domain.Picture;
 import wepa.tr00news.repository.ArticleRepository;
@@ -14,72 +13,62 @@ import wepa.tr00news.repository.PictureRepository;
 public class ArticleService {
 
     @Autowired
-    private ArticleRepository articleRepo;
+    private ArticleRepository articleRepository;
     @Autowired
-    private PictureRepository pictureRepo;
-    @Autowired
-    private PictureService pictureService;
+    private PictureRepository pictureRepository;
 
-    @Transactional
-    public Article save(Article a, MultipartFile f) {
-        a = this.trimArticle(a);
-        a.setPublishedOn(LocalDateTime.now());
+    public Article saveArticle(Article article) {
+        article = trimArticle(article);
+        article.setPublishedOn(LocalDateTime.now());
 
-        Picture p = this.pictureService.convertToPicture(f);
+        return articleRepository.save(article);
+    }
 
-        if (p == null) {
-            p = this.pictureService.getDefaultPicture();
+    public Article updateArticle(Article article, Long id) {
+        Article newArticle = articleRepository.getOne(id);
+
+        if (newArticle == null) {
+            return saveArticle(article);
         }
 
-        p.setArticle(a);
-        p = this.pictureRepo.save(p);
-        a.setPicture(p);
+        article = trimArticle(article);
+        newArticle.setHeadline(article.getHeadline());
+        newArticle.setLead(article.getLead());
+        newArticle.setBody(article.getBody());
 
-        return this.articleRepo.save(a);
+        return articleRepository.save(newArticle);
     }
 
     @Transactional
-    public Article update(Long id, Article aNew, MultipartFile f) {
-        Article a = this.articleRepo.getOne(id);
-
-        if (a == null) {
-            return this.save(aNew, f);
+    public void assignPicture(Article article, Picture picture) {
+        if (picture == null) {
+            return;
         }
 
-        aNew = this.trimArticle(aNew);
-        a.setHeadline(aNew.getHeadline());
-        a.setLead(aNew.getLead());
-        a.setBody(aNew.getBody());
-
-        Picture p = this.pictureService.convertToPicture(f);
-
-        if (p != null) {
-            p.setArticle(a);
-            p = this.pictureRepo.save(p);
-
-            this.pictureRepo.delete(a.getPicture());
-            a.setPicture(p);
+        if (article.getPicture() != null) {
+            pictureRepository.delete(article.getPicture());
         }
 
-        return this.articleRepo.save(a);
+        picture.setArticle(article);
+        article.setPicture(picture);
     }
 
-    private Article trimArticle(Article a) {
-        a.setHeadline(a.getHeadline().trim());
-        a.setLead(a.getLead().trim());
-        a.setBody(a.getBody().trim());
+    private Article trimArticle(Article article) {
+        article.setHeadline(article.getHeadline().trim());
+        article.setLead(article.getLead().trim());
+        article.setBody(article.getBody().trim());
 
-        if (a.getHeadline().isEmpty()) {
-            a.setHeadline("[Headline missing!]");
+        if (article.getHeadline().isEmpty()) {
+            article.setHeadline("[Headline missing!!]");
         }
-        if (a.getLead().isEmpty()) {
-            a.setLead("[Lead paragraph missing!]");
+        if (article.getLead().isEmpty()) {
+            article.setLead("[Lead paragraph missing!!]");
         }
-        if (a.getBody().isEmpty()) {
-            a.setBody("[Running text missing!]");
+        if (article.getBody().isEmpty()) {
+            article.setBody("[Running text missing!!]");
         }
 
-        return a;
+        return article;
     }
 
 }
