@@ -13,6 +13,7 @@ import wepa.tr00news.domain.Article;
 import wepa.tr00news.domain.Picture;
 import wepa.tr00news.repository.ArticleRepository;
 import wepa.tr00news.repository.AuthorRepository;
+import wepa.tr00news.repository.TopicRepository;
 import wepa.tr00news.service.ArticleService;
 import wepa.tr00news.service.PictureService;
 
@@ -27,11 +28,14 @@ public class ArticleController {
     private ArticleRepository articleRepository;
     @Autowired
     private AuthorRepository authorRepository;
+    @Autowired
+    private TopicRepository topicRepository;
 
     @GetMapping("/admin")
     public String getAdmin(Model model) {
         model.addAttribute("articles", articleRepository.findAll());
         model.addAttribute("authors", authorRepository.findAll());
+        model.addAttribute("topics", topicRepository.findAll());
 
         return "admin";
     }

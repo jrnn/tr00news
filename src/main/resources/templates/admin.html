@@ -74,6 +74,39 @@
 
         </section>
 
+        <section>
+            <h2>Topics</h2>
+
+            <div>
+                <p th:if="${#lists.isEmpty(topics)}">(No topics yet!)</p>
+
+                <table th:if="${not #lists.isEmpty(topics)}">
+                    <thead><tr>
+                        <th>Topic name</th>
+                        <th>Articles</th>
+                        <th></th>
+                    </tr></thead>
+                    <tbody><tr th:each="topic : ${topics}">
+                        <td th:text="${topic.name}">Topic name</td>
+                        <td th:text="${topic.articleCount}">Number of articles</td>
+                        <td><form th:action="@{/topics/{id}(id=${topic.id})}" th:method="GET">
+                            <input type="submit" value="Edit" th:id="${'edit-' + topic.id}"/>
+                        </form></td>
+                    </tr></tbody>
+                </table>
+            </div>
+
+            <div>
+                <h3>Add new topic</h3>
+
+                <form th:action="@{/topics}" th:method="POST">
+                    Name: <input type="text" name="name" id="topic-name" /><br/>
+                    <input type="submit" value="Add topic" /><br/>
+                </form>
+            </div>
+
+        </section>
+
     </body>
 
 </html>

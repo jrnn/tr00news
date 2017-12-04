@@ -31,8 +31,11 @@ public class Article extends AbstractPersistable<Long> {
     @OneToOne(mappedBy = "article", fetch = FetchType.LAZY)
     private Picture picture;
 
-    @ManyToMany(mappedBy = "articles", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "articles", fetch = FetchType.LAZY)
     private List<Author> authors;
+
+    @ManyToMany(mappedBy = "articles", fetch = FetchType.LAZY)
+    private List<Topic> topics;
 
     public String getDate() {
         StringBuilder sb = new StringBuilder();

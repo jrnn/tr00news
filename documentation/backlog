@@ -17,12 +17,12 @@ ________________________________________________________________________________
   [X] [171201] adding news articles
   [X] [171202] editing news articles
   [X] [171204] adding authors
-  [ ] [      ] adding categories
-  [ ] [      ] assigning authors and categories to news articles
+  [X] [171204] adding topics
+  [X] [171204] assigning authors and topics to news articles
   [X] [171202] listing five latest news articles on landing page
   [ ] [      ] viewing individual news article
   [ ] [      ] tracking clicks per article
-  [ ] [      ] navigation bar incl. categories
+  [ ] [      ] navigation bar incl. topics
   [ ] [      ] ...
   [ ] [      ] ...
 
@@ -86,10 +86,27 @@ ________________________________________________________________________________
   [X] "ArticleController" handles GET requests to "/admin"
   [X] "AuthorController" handles POST requests to "/authors", GET requests to
       "/authors/{id}", and POST requests to "/authors/{id}/articles"
+  [ ] ??? ... deleting Authors ???
+  [ ] ??? ... renaming Authors ???
   [ ] ...
 
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
-[005] "As ..., I can ..., so that ..."
+[005] "As admin, I can define topics and use them for categorizing articles, so
+      that ..."
+
+  [X] extend "admin.html" with list of and form for creating Topics
+  [X] create "topic.html" listing Articles associated with selected Topic, and
+      form for associating Articles with that Topic
+  [X] create entity and repository for "Topic"
+  [X] update "Article" entity with bidirectional ManyToMany mapping to "Topic"
+  [X] "TopicController" handles POST requests to "/topics", GET requests to
+      "/topics/{id}", and POST requests to "/topics/{id}/articles"
+  [ ] ??? ... deleting Topics ???
+  [ ] ??? ... renaming Topics ???
+  [ ] ...
+
+‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+[006] "As ..., I can ..., so that ..."
 
   [ ] ...
   [ ] ...

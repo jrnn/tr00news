@@ -15,7 +15,7 @@ public class DefaultController {
                 .append("Drink full, and descend.<br/>")
                 .append("The horse is the white of the eyes, and dark within.<br/>");
 
-        for (int i = 0; i < 6; i ++) {
+        for (int i = 0; i < 7; i ++) {
             sb.append("...<br/>Got a light?<br/>");
         }
 
