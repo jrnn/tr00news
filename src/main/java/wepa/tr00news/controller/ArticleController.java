@@ -8,12 +8,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import wepa.tr00news.domain.Article;
 import wepa.tr00news.domain.Picture;
 import wepa.tr00news.repository.ArticleRepository;
-import wepa.tr00news.repository.AuthorRepository;
-import wepa.tr00news.repository.TopicRepository;
 import wepa.tr00news.service.ArticleService;
 import wepa.tr00news.service.PictureService;
 
@@ -26,55 +25,51 @@ public class ArticleController {
     private PictureService pictureService;
     @Autowired
     private ArticleRepository articleRepository;
-    @Autowired
-    private AuthorRepository authorRepository;
-    @Autowired
-    private TopicRepository topicRepository;
-
-    @GetMapping("/admin")
-    public String getAdmin(Model model) {
-        model.addAttribute("articles", articleRepository.findAll());
-        model.addAttribute("authors", authorRepository.findAll());
-        model.addAttribute("topics", topicRepository.findAll());
-
-        return "admin";
-    }
 
     @GetMapping("/articles")
-    public String getAdd(Model model) {
+    public String getAddArticle(Model model) {
         return "article";
     }
 
     @GetMapping("/articles/{id}")
-    public String getEdit(@PathVariable Long id, Model model) {
+    public String getEditArticle(Model model, @PathVariable Long id) {
         model.addAttribute("article", articleRepository.getOne(id));
 
         return "article";
     }
 
     @PostMapping("/articles")
-    public String postAdd(
+    public String postAddArticle(
             @ModelAttribute Article article,
             @RequestParam(value = "file") MultipartFile file
     ) {
         article = articleService.saveArticle(article);
         Picture picture = pictureService.savePicture(file);
-        articleService.assignPicture(article, picture);
+        articleService.assignPictureToArticle(article, picture);
 
         return "redirect:/articles/" + article.getId();
     }
 
     @PostMapping("/articles/{id}")
-    public String postEdit(
+    public String postEditArticle(
+            @PathVariable Long id,
             @ModelAttribute Article article,
-            @RequestParam(value = "file") MultipartFile file,
-            @PathVariable Long id
+            @RequestParam(value = "file") MultipartFile file
     ) {
-        article = articleService.updateArticle(article, id);
+        article = articleService.updateArticle(id, article);
         Picture picture = pictureService.savePicture(file);
-        articleService.assignPicture(article, picture);
+        articleService.assignPictureToArticle(article, picture);
 
         return "redirect:/articles/" + article.getId();
+    }
+
+    @GetMapping(
+            path = "/articles/{id}/picture",
+            produces = {"image/jpg", "image/jpeg", "image/png", "image/gif", "image/bmp"}
+    )
+    @ResponseBody
+    public byte[] getPicture(@PathVariable Long id) {
+        return articleRepository.getOne(id).getPicture().getContent();
     }
 
 }

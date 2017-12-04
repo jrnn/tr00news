@@ -58,7 +58,7 @@ ________________________________________________________________________________
 
   [X] create "news.html" listing Articles (show headline, lead, and picture)
   [X] "NewsController" handles GET requests to "/news"
-  [X] "PictureController" handles GET requests to "/articles/{id}/picture" (for
+  [X] "ArticleController" handles GET requests to "/articles/{id}/picture" (for
       viewing Pictures)
   [X] "NewsService" fetches only 5 latest Articles in descending order
   [ ] ...
@@ -80,14 +80,16 @@ ________________________________________________________________________________
   [X] create "admin.html" listing all Articles and Authors, with links to their
       respective subpages, and with form for adding Authors
   [X] create "author.html" listing Articles assigned to selected Author, and
-      form for assigning Articles to that Author
+      form for assigning/removing Articles to/from that Author
   [X] create entity and repository for "Author"
   [X] update "Article" entity with bidirectional ManyToMany mapping to "Author"
-  [X] "ArticleController" handles GET requests to "/admin"
-  [X] "AuthorController" handles POST requests to "/authors", GET requests to
-      "/authors/{id}", and POST requests to "/authors/{id}/articles"
-  [ ] ??? ... deleting Authors ???
-  [ ] ??? ... renaming Authors ???
+  [X] "IndexController" handles GET requests to "/admin"
+  [X] "AuthorController" handles various GET, POST and DELETE requests to
+      "/authors" and its subaddresses
+  [X] "AuthorService" validates, saves, and updates Authors
+  [X] "AuthorService" assigns/decouples Articles to/from Authors
+  [X] "ArticleRepository" knows custom query "findUnassignedToAuthor"
+  [ ] ( should deleting Authors be allowed? )
   [ ] ...
 
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
@@ -96,13 +98,15 @@ ________________________________________________________________________________
 
   [X] extend "admin.html" with list of and form for creating Topics
   [X] create "topic.html" listing Articles associated with selected Topic, and
-      form for associating Articles with that Topic
+      form for assigning/removing Articles to/from that Topic
   [X] create entity and repository for "Topic"
   [X] update "Article" entity with bidirectional ManyToMany mapping to "Topic"
-  [X] "TopicController" handles POST requests to "/topics", GET requests to
-      "/topics/{id}", and POST requests to "/topics/{id}/articles"
-  [ ] ??? ... deleting Topics ???
-  [ ] ??? ... renaming Topics ???
+  [X] "TopicController" handles various GET, POST and DELETE requests to
+      "/topics" and its subaddresses
+  [X] "TopicService" validates, saves, and updates Authors
+  [X] "TopicService" assigns/decouples Articles to/from Authors
+  [X] "ArticleRepository" knows custom query "findUnassignedToTopic"
+  [ ] ( should deleting Topics be allowed? )
   [ ] ...
 
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾

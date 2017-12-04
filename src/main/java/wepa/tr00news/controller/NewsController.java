@@ -15,7 +15,7 @@ public class NewsController {
     private ArticleRepository articleRepository;
 
     @GetMapping("/news")
-    public String getNews(Model model) {
+    public String getNewsHome(Model model) {
         model.addAttribute("articles", articleRepository.findAll(
                 PageRequest.of(0, 5, Sort.Direction.DESC, "publishedOn")
         ));

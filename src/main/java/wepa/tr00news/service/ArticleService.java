@@ -24,24 +24,24 @@ public class ArticleService {
         return articleRepository.save(article);
     }
 
-    public Article updateArticle(Article article, Long id) {
-        Article newArticle = articleRepository.getOne(id);
+    public Article updateArticle(Long id, Article newArticle) {
+        Article article = articleRepository.getOne(id);
 
-        if (newArticle == null) {
-            return saveArticle(article);
+        if (article == null) {
+            return saveArticle(newArticle);
         }
 
-        article = trimArticle(article);
-        newArticle.setHeadline(article.getHeadline());
-        newArticle.setLead(article.getLead());
-        newArticle.setBody(article.getBody());
+        newArticle = trimArticle(newArticle);
+        article.setHeadline(newArticle.getHeadline());
+        article.setLead(newArticle.getLead());
+        article.setBody(newArticle.getBody());
 
-        return articleRepository.save(newArticle);
+        return articleRepository.save(article);
     }
 
     @Transactional
-    public void assignPicture(Article article, Picture picture) {
-        if (picture == null) {
+    public void assignPictureToArticle(Article article, Picture picture) {
+        if (article == null || picture == null) {
             return;
         }
 

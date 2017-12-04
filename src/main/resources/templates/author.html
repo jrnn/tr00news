@@ -12,6 +12,11 @@
 
         <section>
             <h2 th:text="${author.name}">Author name</h2>
+
+            <form th:action="@{/authors/{id}(id=${author.id})}" th:method="POST">
+                Rename author: <input type="text" name="name" id="name" th:value="${author.name}" />
+                <input type="submit" value="Update" />
+            </form>
         </section>
 
         <section>
@@ -31,9 +36,13 @@
             <table>
                 <thead><tr>
                     <th>Article headline</th>
+                    <th></th>
                 </tr></thead>
                 <tbody><tr th:each="article : ${author.articles}">
                     <td th:text="${article.headline}">Article headline</td>
+                    <td><form th:method="DELETE" th:action="@{/authors/{authorId}/articles/{articleId}(authorId=${author.id},articleId=${article.id})}">
+                        <input type="submit" value="Remove" th:id="${'delete-' + article.id}" />
+                    </form></td>
                 </tr></tbody>
             </table>
         </section>
