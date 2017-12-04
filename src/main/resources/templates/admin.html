@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+    <head lang="en">
+        <meta charset="UTF-8" />
+        <title>tr00news | admin</title>
+    </head>
+
+    <body>
+
+        <h1>Admin home | Heavily under construction...</h1>
+
+        <section>
+            <h2>Articles</h2>
+
+            <div>
+                <p th:if="${#lists.isEmpty(articles)}">(No articles yet!)</p>
+
+                <table th:if="${not #lists.isEmpty(articles)}">
+                    <thead><tr>
+                        <th>Published on</th>
+                        <th>Headline</th>
+                        <th>Clicks</th>
+                        <th></th>
+                    </tr></thead>
+                    <tbody><tr th:each="article : ${articles}">
+                        <td th:text="${article.date}">Published on</td>
+                        <td th:text="${article.headline}">Headline</td>
+                        <td>CLICKS TBA</td>
+                        <td><form th:action="@{/articles/{id}(id=${article.id})}" th:method="GET">
+                            <input type="submit" value="Edit" th:id="${'edit-' + article.id}"/>
+                        </form></td>
+                    </tr></tbody>
+                </table>
+            </div>
+
+            <div>
+                <form th:action="@{/articles}" th:method="GET">
+                    <input type="submit" value="Add new article" id="add-new" />
+                </form>
+            </div>
+        </section>
+
+        <section>
+            <h2>Authors</h2>
+
+            <div>
+                <p th:if="${#lists.isEmpty(authors)}">(No authors yet!)</p>
+
+                <table th:if="${not #lists.isEmpty(authors)}">
+                    <thead><tr>
+                        <th>Author name</th>
+                        <th>Articles</th>
+                        <th></th>
+                    </tr></thead>
+                    <tbody><tr th:each="author : ${authors}">
+                        <td th:text="${author.name}">Author name</td>
+                        <td th:text="${author.articleCount}">Number of articles</td>
+                        <td><form th:action="@{/authors/{id}(id=${author.id})}" th:method="GET">
+                            <input type="submit" value="Edit" th:id="${'edit-' + author.id}"/>
+                        </form></td>
+                    </tr></tbody>
+                </table>
+            </div>
+
+            <div>
+                <h3>Add new author</h3>
+
+                <form th:action="@{/authors}" th:method="POST">
+                    Name: <input type="text" name="name" id="author-name" /><br/>
+                    <input type="submit" value="Add author" /><br/>
+                </form>
+            </div>
+
+        </section>
+
+    </body>
+
+</html>

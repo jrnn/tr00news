@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+    <head lang="en">
+        <meta charset="UTF-8" />
+        <title>tr00news | manage author</title>
+    </head>
+
+    <body>
+
+        <h1>Heavily under construction...</h1>
+
+        <section>
+            <h2 th:text="${author.name}">Author name</h2>
+        </section>
+
+        <section>
+            <h3>Assign article to author</h3>
+
+            <form th:action="@{/authors/{id}/articles(id=${author.id})}" th:method="POST">
+                Pick article: <select name="articleId">
+                    <option th:each="article : ${articles}" th:value="${article.id}" th:text="${article.headline}">Article</option>
+                </select>
+                <input type="submit" value="Assign" id="add-to-article" />
+            </form>
+        </section>
+
+        <section>
+            <h3>Noted as author in following articles</h3>
+
+            <table>
+                <thead><tr>
+                    <th>Article headline</th>
+                </tr></thead>
+                <tbody><tr th:each="article : ${author.articles}">
+                    <td th:text="${article.headline}">Article headline</td>
+                </tr></tbody>
+            </table>
+        </section>
+
+        <section>
+            <a th:href="@{/admin}">Back to admin main</a>
+        </section>
+
+    </body>
+
+</html>

@@ -1,10 +1,12 @@
 package wepa.tr00news.domain;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -28,5 +30,28 @@ public class Article extends AbstractPersistable<Long> {
 
     @OneToOne(mappedBy = "article", fetch = FetchType.LAZY)
     private Picture picture;
+
+    @ManyToMany(mappedBy = "articles", fetch = FetchType.EAGER)
+    private List<Author> authors;
+
+    public String getDate() {
+        StringBuilder sb = new StringBuilder();
+        LocalDateTime d = getPublishedOn();
+
+        sb.append(d.getYear()).append(".");
+
+        if (d.getMonthValue() < 10) {
+            sb.append("0");
+        }
+
+        sb.append(d.getMonthValue()).append(".");
+
+        if (d.getDayOfMonth() < 10) {
+            sb.append("0");
+        }
+
+        sb.append(d.getDayOfMonth());
+        return sb.toString();
+    }
 
 }

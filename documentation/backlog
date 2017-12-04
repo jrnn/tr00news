@@ -3,7 +3,9 @@ WHAT IS THIS S**T?
 ________________________________________________________________________________
 
 This is just a rough backlog for listing requirements, breaking them down into
-concrete tasks, and trying to keep track of progress ...
+concrete tasks, and trying to keep track of progress ... And also, based on user
+experience, jotting down improvement ideas, most of which probably will never be
+implemented ...
 
 
 
@@ -14,14 +16,24 @@ ________________________________________________________________________________
   [X] [171201] setting up deployment pipeline (GitHub > Travis > Heroku)
   [X] [171201] adding news articles
   [X] [171202] editing news articles
-  [ ] [      ] adding authors
+  [X] [171204] adding authors
   [ ] [      ] adding categories
   [ ] [      ] assigning authors and categories to news articles
   [X] [171202] listing five latest news articles on landing page
   [ ] [      ] viewing individual news article
+  [ ] [      ] tracking clicks per article
   [ ] [      ] navigation bar incl. categories
   [ ] [      ] ...
-  [ ] [      ] tracking clicks per article
+  [ ] [      ] ...
+
+
+
+‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+IMPROVEMENT IDEAS
+________________________________________________________________________________
+
+  [ ] [      ] ...
+  [ ] [      ] ...
   [ ] [      ] ...
 
 
@@ -32,23 +44,23 @@ ________________________________________________________________________________
 
 [001] "As admin, I can add news articles, so that ..."
 
-  [X] create "article.html" with form for posting an Article
+  [X] create "article.html" with form for posting Articles and Pictures
   [X] create entities and repositories for "Article", "Picture"
-  [X] "ArticleController" handles GET and POST requests to "/admin/articles"
-  [X] "ArticleService" validates and saves Articles (with Pictures)
-  [X] "PictureService" handles inbound Pictures and, in case of invalid input,
-      provides a placeholder picture instead
+  [X] "ArticleController" handles GET and POST requests to "/articles"
+  [X] "ArticleService" validates and saves Articles
+  [X] "ArticleService" assigns Pictures to Articles
+  [X] "PictureService" converts and saves inbound Pictures
   [ ] ...
 
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
-[002] "As reader, I can see what's latest news right on the landing page, so
-      that ..."
+[002] "As reader, I can immediately see what's latest news on the landing page,
+      so that ..."
 
   [X] create "news.html" listing Articles (show headline, lead, and picture)
   [X] "NewsController" handles GET requests to "/news"
-  [X] "ArticleController" handles GET requests to "/articles/{id}/picture" (for
+  [X] "PictureController" handles GET requests to "/articles/{id}/picture" (for
       viewing Pictures)
-  [X] <???> ... show only 5 latest Articles in descending order
+  [X] "NewsService" fetches only 5 latest Articles in descending order
   [ ] ...
 
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
@@ -56,13 +68,28 @@ ________________________________________________________________________________
 
   [X] extend "article.html" with prefilled form for editing and posting an
       existing Article
-  [X] "ArticleController" handles GET and POST requests to "/admin/articles
-      /{articleId}"
+  [X] "ArticleController" handles GET and POST requests to "/articles/{id}"
   [X] "ArticleService" updates existing Articles (incl. Picture replacement)
+  [X] show placeholder image for Articles without assigned Picture
   [ ] ...
 
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
-[004] "As ..., I can ..., so that ..."
+[004] "As admin, I can manage authors and their ownership of articles, so that
+      ..."
+
+  [X] create "admin.html" listing all Articles and Authors, with links to their
+      respective subpages, and with form for adding Authors
+  [X] create "author.html" listing Articles assigned to selected Author, and
+      form for assigning Articles to that Author
+  [X] create entity and repository for "Author"
+  [X] update "Article" entity with bidirectional ManyToMany mapping to "Author"
+  [X] "ArticleController" handles GET requests to "/admin"
+  [X] "AuthorController" handles POST requests to "/authors", GET requests to
+      "/authors/{id}", and POST requests to "/authors/{id}/articles"
+  [ ] ...
+
+‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+[005] "As ..., I can ..., so that ..."
 
   [ ] ...
   [ ] ...

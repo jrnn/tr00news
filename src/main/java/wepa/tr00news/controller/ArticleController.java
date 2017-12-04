@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import wepa.tr00news.domain.Article;
 import wepa.tr00news.domain.Picture;
 import wepa.tr00news.repository.ArticleRepository;
+import wepa.tr00news.repository.AuthorRepository;
 import wepa.tr00news.service.ArticleService;
 import wepa.tr00news.service.PictureService;
 
@@ -24,6 +25,16 @@ public class ArticleController {
     private PictureService pictureService;
     @Autowired
     private ArticleRepository articleRepository;
+    @Autowired
+    private AuthorRepository authorRepository;
+
+    @GetMapping("/admin")
+    public String getAdmin(Model model) {
+        model.addAttribute("articles", articleRepository.findAll());
+        model.addAttribute("authors", authorRepository.findAll());
+
+        return "admin";
+    }
 
     @GetMapping("/articles")
     public String getAdd(Model model) {
