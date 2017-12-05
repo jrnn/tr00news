@@ -6,13 +6,17 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import wepa.tr00news.repository.ArticleRepository;
+import wepa.tr00news.service.ClickService;
 
 @Controller
 public class NewsController {
 
     @Autowired
     private ArticleRepository articleRepository;
+    @Autowired
+    private ClickService clickService;
 
     @GetMapping("/news")
     public String getNewsHome(Model model) {
@@ -21,6 +25,14 @@ public class NewsController {
         ));
 
         return "news";
+    }
+
+    @GetMapping("/news/{id}")
+    public String getArticle(Model model, @PathVariable Long id) {
+        model.addAttribute("article", articleRepository.getOne(id));
+        clickService.addClickToArticle(id);
+
+        return "article_view";
     }
 
 }

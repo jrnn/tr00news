@@ -30,4 +30,11 @@ public class Author extends AbstractPersistable<Long> {
         return getArticles().size();
     }
 
+    public int getClickCount() {
+        return getArticles()
+                .stream()
+                .mapToInt(a -> a.getClickCount())
+                .sum();
+    }
+
 }

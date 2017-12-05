@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+    <head lang="en">
+        <meta charset="UTF-8" />
+        <title>tr00news | be tr00 -- resolutely reject fake news and alternative truths</title>
+    </head>
+
+    <body>
+
+        <h1>Heavily under construction...</h1>
+
+        <section>
+            <h2 th:text="${article.headline}">Headline</h2>
+
+            <img th:if='${article.picture} != null' th:src="@{/articles/{id}/picture(id=${article.id})}"/>
+            <img th:if='${article.picture} == null' th:src="@{/img/default.png}"/>
+            <p>
+                <span th:text="${article.date}">Date</span> | 
+                <span th:each="author : ${article.authors}" th:text="${author.name}">Authors</span><br/>
+            </p>
+            <h5 th:text="${article.lead}">Lead paragraph</h5>
+            <p th:text="${article.body}">Running text</p>
+        </section>
+
+        <section>
+            <a th:href="@{/news}">Back to main page</a>
+        </section>
+
+    </body>
+
+</html>

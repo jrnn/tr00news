@@ -26,7 +26,7 @@
                     <tbody><tr th:each="article : ${articles}">
                         <td th:text="${article.date}">Published on</td>
                         <td th:text="${article.headline}">Headline</td>
-                        <td>CLICKS TBA</td>
+                        <td th:text="${article.clickCount}">Number of clicks</td>
                         <td><form th:action="@{/articles/{id}(id=${article.id})}" th:method="GET">
                             <input type="submit" value="Edit" th:id="${'edit-' + article.id}"/>
                         </form></td>
@@ -51,11 +51,13 @@
                     <thead><tr>
                         <th>Author name</th>
                         <th>Articles</th>
+                        <th>Total clicks</th>
                         <th></th>
                     </tr></thead>
                     <tbody><tr th:each="author : ${authors}">
                         <td th:text="${author.name}">Author name</td>
                         <td th:text="${author.articleCount}">Number of articles</td>
+                        <td th:text="${author.clickCount}">Number of clicks in articles</td>
                         <td><form th:action="@{/authors/{id}(id=${author.id})}" th:method="GET">
                             <input type="submit" value="Edit" th:id="${'edit-' + author.id}"/>
                         </form></td>
@@ -84,11 +86,13 @@
                     <thead><tr>
                         <th>Topic name</th>
                         <th>Articles</th>
+                        <th>Total clicks</th>
                         <th></th>
                     </tr></thead>
                     <tbody><tr th:each="topic : ${topics}">
                         <td th:text="${topic.name}">Topic name</td>
                         <td th:text="${topic.articleCount}">Number of articles</td>
+                        <td th:text="${topic.clickCount}">Number of clicks in articles</td>
                         <td><form th:action="@{/topics/{id}(id=${topic.id})}" th:method="GET">
                             <input type="submit" value="Edit" th:id="${'edit-' + topic.id}"/>
                         </form></td>

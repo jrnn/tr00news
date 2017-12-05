@@ -14,14 +14,15 @@ REQUIREMENTS
 ________________________________________________________________________________
 
   [X] [171201] setting up deployment pipeline (GitHub > Travis > Heroku)
+  [ ] [      ] setting up production profile and PostgreSQL in Heroku
   [X] [171201] adding news articles
   [X] [171202] editing news articles
   [X] [171204] adding authors
   [X] [171204] adding topics
   [X] [171204] assigning authors and topics to news articles
   [X] [171202] listing five latest news articles on landing page
-  [ ] [      ] viewing individual news article
-  [ ] [      ] tracking clicks per article
+  [X] [171205] viewing individual news article
+  [X] [171205] tracking clicks per article
   [ ] [      ] navigation bar incl. topics
   [ ] [      ] ...
   [ ] [      ] ...
@@ -32,6 +33,7 @@ ________________________________________________________________________________
 IMPROVEMENT IDEAS
 ________________________________________________________________________________
 
+  [ ] [      ] Ability to search for news articles by keyword(s)
   [ ] [      ] ...
   [ ] [      ] ...
   [ ] [      ] ...
@@ -110,7 +112,27 @@ ________________________________________________________________________________
   [ ] ...
 
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
-[006] "As ..., I can ..., so that ..."
+[006] "As reader, I can click on an article of interest to see the full content,
+      so that ..."
+
+  [X] create "article_view.html" showing an individual Article's contents
+  [X] "NewsController" handles GET requests to "/news/{id}"
+  [X] clicking on any Article's headline opens that Article in detail
+  [ ] ...
+
+‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+[007] "As admin, I can see how many clicks each Article gets, so that ..."
+
+  [X] create entity and repository for "Click"
+  [X] update "Article" entity with bidirectional OneToMany mapping to "Click"
+  [X] "ClickService" identifies and saves Clicks by session and time
+  [X] "NewsController" calls "ClickService" on GET requests to "/news/{id}"
+  [X] Articles can count their clicks, and Authors/Topics can count the
+      aggregate clicks of their associated Articles
+  [ ] ...
+
+‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+[008] "As ..., I can ..., so that ..."
 
   [ ] ...
   [ ] ...
