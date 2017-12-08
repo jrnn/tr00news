@@ -30,10 +30,10 @@ public class Article extends AbstractPersistable<Long> {
     @Column(name = "headline")
     private String headline;
 
-    @Column(name = "lead", columnDefinition = "LONGTEXT")
+    @Column(name = "lead", columnDefinition = "TEXT")
     private String lead;
 
-    @Column(name = "body", columnDefinition = "LONGTEXT")
+    @Column(name = "body", columnDefinition = "TEXT")
     private String body;
 
     @Column(name = "published_on")
