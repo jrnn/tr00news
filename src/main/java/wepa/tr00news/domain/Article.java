@@ -4,12 +4,12 @@ import java.time.LocalDateTime;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,29 +19,36 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@Table(name = "Article")
 public class Article extends AbstractPersistable<Long> {
 
     @Id
     @GeneratedValue
+    @Column(name = "id")
     private Long id;
 
+    @Column(name = "headline")
     private String headline;
-    @Column(columnDefinition = "LONGTEXT")
+
+    @Column(name = "lead", columnDefinition = "LONGTEXT")
     private String lead;
-    @Column(columnDefinition = "LONGTEXT")
+
+    @Column(name = "body", columnDefinition = "LONGTEXT")
     private String body;
+
+    @Column(name = "published_on")
     private LocalDateTime publishedOn;
 
-    @OneToOne(mappedBy = "article", fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "article")
     private Picture picture;
 
-    @OneToMany(mappedBy = "article", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "article")
     private List<Click> clicks;
 
-    @ManyToMany(mappedBy = "articles", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "articles")
     private List<Author> authors;
 
-    @ManyToMany(mappedBy = "articles", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "articles")
     private List<Topic> topics;
 
     public int getClickCount() {
