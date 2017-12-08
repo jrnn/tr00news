@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Profile;
 
 @Configuration
 @Profile("production")
-public class ProductionProfile {
+public class ProductionConfiguration {
 
     @Bean
     @ConfigurationProperties(prefix = "spring.datasource")

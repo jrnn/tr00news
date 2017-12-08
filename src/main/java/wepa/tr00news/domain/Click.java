@@ -26,7 +26,7 @@ public class Click extends AbstractPersistable<Long> {
     private LocalDateTime happenedOn;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn
+    @JoinColumn(name = "article_id")
     private Article article;
 
 }

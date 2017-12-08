@@ -26,7 +26,7 @@ public class Picture extends AbstractPersistable<Long> {
     private byte[] content;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn
+    @JoinColumn(name = "article_id")
     private Article article;
 
 }
