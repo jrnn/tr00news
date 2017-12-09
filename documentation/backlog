@@ -15,7 +15,7 @@ ________________________________________________________________________________
 
   [X] [171201] setting up deployment pipeline (GitHub > Travis > Heroku)
   [X] [171208] setting up production profile and PostgreSQL in Heroku
-  [ ] [      ] simple authentication for admin side
+  [X] [171209] simple authentication for admin side
   [X] [171201] adding news articles
   [X] [171202] editing news articles
   [X] [171204] adding authors
@@ -140,9 +140,10 @@ ________________________________________________________________________________
   [X] "ProductionSecurityConfiguration" limits /admin* only to ADMIN authority,
       permits /news* and /pictures* for all, and and handles login/logout in a
       smart way for all users
-  [ ] "application-production.properties" defines "admin" user with heroku
-      config variable ${TR00NEWS_PASSWORD} as password
-  [ ] ...
+  [X] "ProductionSecurityConfiguration" handles in-memory authentication for
+      "admin" user taking config variable TR00NEWS_PASSWORD as password
+  [X] "IndexController" redirects either to /news or /admin depending on user's
+      authentication
 
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 [009] "As ..., I can ..., so that ..."

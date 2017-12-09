@@ -1,6 +1,7 @@
 package wepa.tr00news.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +22,13 @@ public class IndexController {
 
     @RequestMapping("*")
     public String handleDefault() {
-        return "redirect:/admin";
+        String user = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        if (user.equals("admin")) {
+            return "redirect:/admin";
+        }
+
+        return "redirect:/news";
     }
 
     @GetMapping("/admin")
