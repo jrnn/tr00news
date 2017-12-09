@@ -29,7 +29,7 @@ public class TopicController {
         model.addAttribute("topic", topicRepository.getOne(id));
         model.addAttribute("articles", articleRepository.findUnassignedToTopic(id));
 
-        return "topic";
+        return "admin_topic";
     }
 
     @PostMapping("/admin/topics")

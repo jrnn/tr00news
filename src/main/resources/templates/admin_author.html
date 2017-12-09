@@ -8,33 +8,33 @@
 
     <body>
         <div>
-            <h1>Manage topic</h1>
+            <h1>Manage author</h1>
         </div>
 
         <div>
-            <h2 th:text="${topic.name}">Topic name</h2>
+            <h2 th:text="${author.name}">Author name</h2>
 
-            <form th:method="POST" th:action="@{/admin/topics/{id}(id=${topic.id})}">
-                <p>Rename topic: <input type="text" name="name" id="name" th:value="${topic.name}" />
+            <form th:method="POST" th:action="@{/admin/authors/{id}(id=${author.id})}">
+                <p>Rename author: <input type="text" name="name" id="name" th:value="${author.name}" />
                 <input type="submit" value="Update" /></p>
             </form>
         </div>
 
         <div>
-            <h3>Associate article with topic</h3>
+            <h3>Assign article to author</h3>
 
-            <form th:method="POST" th:action="@{/admin/topics/{id}/articles(id=${topic.id})}">
+            <form th:method="POST" th:action="@{/admin/authors/{id}/articles(id=${author.id})}">
                 <p>Pick article: 
                     <select name="articleId">
                         <option th:each="article : ${articles}" th:value="${article.id}" th:text="${article.headline}">Article</option>
                     </select>
-                    <input type="submit" value="Associate" id="add-to-article" />
+                    <input type="submit" value="Assign" id="add-to-article" />
                 </p>
             </form>
         </div>
 
         <div>
-            <h3>Topic is associated to following articles</h3>
+            <h3>Noted as author in following articles</h3>
 
             <table>
                 <thead>
@@ -44,10 +44,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="article : ${topic.articles}">
+                    <tr th:each="article : ${author.articles}">
                         <td th:text="${article.headline}">Article headline</td>
-                        <td><form th:method="DELETE" th:action="@{/admin/topics/{topicId}/articles/{articleId}(topicId=${topic.id},articleId=${article.id})}">
-                            <input type="submit" value="Remove" th:id="${'delete-' + topic.id}" />
+                        <td><form th:method="DELETE" th:action="@{/admin/authors/{authorId}/articles/{articleId}(authorId=${author.id},articleId=${article.id})}">
+                            <input type="submit" value="Remove" th:id="${'delete-' + article.id}" />
                         </form></td>
                     </tr>
                 </tbody>
@@ -57,6 +57,8 @@
         <div>
             <p><a th:href="@{/admin}">Back to admin main</a></p>
         </div>
+
+        <footer th:replace="fragments/footer :: footer">Standard footer</footer>
     </body>
 
 </html>

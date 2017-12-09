@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+    <title>tr00news | be tr00 -- resolutely reject fake news and alternative truths</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+          crossorigin="anonymous" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" />
+  </head>
+
+  <body>
+    <header th:replace="fragments/news_nav :: news_nav">News header</header>
+
+    <div class="dark-green-box">
+      <h3 th:text="${article.headline}" class="container" align="center">Headline</h3>
+    </div>
+
+    <section class="white-box">
+      <div class="container" align="center">
+        <img th:if='${article.picture} != null' th:src="@{/pictures/{id}(id=${article.id})}" class="img-fluid" />
+        <img th:if='${article.picture} == null' th:src="@{/img/default.png}" class="img-fluid" />
+      </div>
+    </section>
+
+    <section class="whiteish-box">
+      <div class="container" align="center">
+        <h5 class="moustache-wizards">
+          <span th:text="${article.date}">Date</span>
+          <span th:each="author : ${article.authors}" th:text="${' | ' + author.name}">Authors</span>
+        </h5>
+      </div>
+
+      <div class="container" align="center">
+        <p th:text="${article.lead}" class="lead">Lead paragraph</p>
+      </div>
+    </section>
+
+    <section class="white-box">
+      <div class="container" align="justify">
+        <p th:each='paragraph : ${article.paragraphs}' th:text="${paragraph}" class="lead">Running text</p>
+      </div>
+    </section>
+
+    <footer th:replace="fragments/footer :: footer">Standard footer</footer>
+  </body>
+
+</html>

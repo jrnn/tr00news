@@ -27,14 +27,14 @@ public class ArticleController {
 
     @GetMapping("/admin/articles")
     public String view(Model model) {
-        return "article";
+        return "admin_article";
     }
 
     @GetMapping("/admin/articles/{id}")
     public String edit(Model model, @PathVariable Long id) {
         model.addAttribute("article", articleRepository.getOne(id));
 
-        return "article";
+        return "admin_article";
     }
 
     @PostMapping("/admin/articles")

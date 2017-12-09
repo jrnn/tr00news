@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+    <title></title>
+    <meta charset="UTF-8" />
+  </head>
+
+  <body>
+    <header th:fragment="news_nav">
+      <div class="container" align="center">
+        <p>
+          <a th:href="@{/news}">Tuoreimmat</a> | 
+          <span th:each="topic : ${topics}">
+            <a th:href="@{/admin/topics/{id}(id=${topic.id})}">
+              <span th:text="${topic.name}">Topic</span>
+            </a> | 
+          </span>
+          <a th:href="@{/admin}">Admin</a>
+        </p>
+      </div>
+    </header>
+  </body>
+
+</html>

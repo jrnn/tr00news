@@ -23,9 +23,12 @@ ________________________________________________________________________________
   [X] [171204] assigning authors and topics to news articles
   [X] [171202] listing five latest news articles on landing page
   [X] [171205] viewing individual news article
+  [ ] [      ] listing most read and latest articles (without pictures)
+  [ ] [      ] listing articles by topic/author
   [X] [171205] tracking clicks per article
-  [ ] [      ] navigation bar incl. topics
-  [ ] [      ] ...
+  [X] [171209] navigation bar incl. topics
+  [X] [171209] css styling
+  [ ] [      ] admin side navigation bar incl. logout
   [ ] [      ] ...
 
 
@@ -34,7 +37,8 @@ ________________________________________________________________________________
 IMPROVEMENT IDEAS
 ________________________________________________________________________________
 
-  [ ] [      ] Ability to search for news articles by keyword(s)
+  [ ] [      ] unit testing
+  [ ] [      ] ability to search for news articles by keyword(s)
   [ ] [      ] ...
   [ ] [      ] ...
   [ ] [      ] ...
@@ -141,7 +145,7 @@ ________________________________________________________________________________
       permits /news* and /pictures* for all, and and handles login/logout in a
       smart way for all users
   [X] "ProductionSecurityConfiguration" handles in-memory authentication for
-      "admin" user taking config variable TR00NEWS_PASSWORD as password
+      "admin" user taking heroku config var TR00NEWS_PASSWORD as password
   [X] "IndexController" redirects either to /news or /admin depending on user's
       authentication
 

@@ -29,7 +29,7 @@ public class AuthorController {
         model.addAttribute("author", authorRepository.getOne(id));
         model.addAttribute("articles", articleRepository.findUnassignedToAuthor(id));
 
-        return "author";
+        return "admin_author";
     }
 
     @PostMapping("/admin/authors")
