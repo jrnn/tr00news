@@ -25,7 +25,7 @@ public class TopicController {
     private TopicService topicService;
 
     @GetMapping("/topics/{id}")
-    public String getEditTopic(Model model, @PathVariable Long id) {
+    public String viewTopic(Model model, @PathVariable Long id) {
         model.addAttribute("topic", topicRepository.getOne(id));
         model.addAttribute("articles", articleRepository.findUnassignedToTopic(id));
 
@@ -33,14 +33,14 @@ public class TopicController {
     }
 
     @PostMapping("/topics")
-    public String postAddTopic(@RequestParam String name) {
+    public String addTopic(@RequestParam String name) {
         topicService.saveTopic(name.trim());
 
         return "redirect:/admin";
     }
 
     @PostMapping("/topics/{id}")
-    public String postEditTopic(
+    public String renameTopic(
             @PathVariable Long id,
             @RequestParam String name
     ) {

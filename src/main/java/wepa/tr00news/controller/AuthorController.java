@@ -25,7 +25,7 @@ public class AuthorController {
     private AuthorService authorService;
 
     @GetMapping("/authors/{id}")
-    public String getEditAuthor(Model model, @PathVariable Long id) {
+    public String viewAuthor(Model model, @PathVariable Long id) {
         model.addAttribute("author", authorRepository.getOne(id));
         model.addAttribute("articles", articleRepository.findUnassignedToAuthor(id));
 
@@ -33,14 +33,14 @@ public class AuthorController {
     }
 
     @PostMapping("/authors")
-    public String postAddAuthor(@RequestParam String name) {
+    public String addAuthor(@RequestParam String name) {
         authorService.saveAuthor(name.trim());
 
         return "redirect:/admin";
     }
 
     @PostMapping("/authors/{id}")
-    public String postEditAuthor(
+    public String renameAuthor(
             @PathVariable Long id,
             @RequestParam String name
     ) {

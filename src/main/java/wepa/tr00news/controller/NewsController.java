@@ -19,7 +19,7 @@ public class NewsController {
     private ClickService clickService;
 
     @GetMapping("/news")
-    public String getNewsHome(Model model) {
+    public String viewMain(Model model) {
         model.addAttribute("articles", articleRepository.findAll(
                 PageRequest.of(0, 5, Sort.Direction.DESC, "publishedOn")
         ));
@@ -28,7 +28,7 @@ public class NewsController {
     }
 
     @GetMapping("/news/{id}")
-    public String getArticle(Model model, @PathVariable Long id) {
+    public String viewArticle(Model model, @PathVariable Long id) {
         model.addAttribute("article", articleRepository.getOne(id));
         clickService.addClickToArticle(id);
 

@@ -27,19 +27,19 @@ public class ArticleController {
     private ArticleRepository articleRepository;
 
     @GetMapping("/articles")
-    public String getAddArticle(Model model) {
+    public String addArticle(Model model) {
         return "article";
     }
 
     @GetMapping("/articles/{id}")
-    public String getEditArticle(Model model, @PathVariable Long id) {
+    public String editArticle(Model model, @PathVariable Long id) {
         model.addAttribute("article", articleRepository.getOne(id));
 
         return "article";
     }
 
     @PostMapping("/articles")
-    public String postAddArticle(
+    public String saveArticle(
             @ModelAttribute Article article,
             @RequestParam(value = "file") MultipartFile file
     ) {
@@ -51,7 +51,7 @@ public class ArticleController {
     }
 
     @PostMapping("/articles/{id}")
-    public String postEditArticle(
+    public String updateArticle(
             @PathVariable Long id,
             @ModelAttribute Article article,
             @RequestParam(value = "file") MultipartFile file
@@ -68,8 +68,13 @@ public class ArticleController {
             produces = {"image/jpg", "image/jpeg", "image/png", "image/gif", "image/bmp"}
     )
     @ResponseBody
-    public byte[] getPicture(@PathVariable Long id) {
-        return articleRepository.getOne(id).getPicture().getContent();
+    public byte[] viewPicture(@PathVariable Long id) {
+        try {
+            return articleRepository.getOne(id).getPicture().getContent();
+        } catch (Throwable t) {
+        }
+
+        return null;
     }
 
 }

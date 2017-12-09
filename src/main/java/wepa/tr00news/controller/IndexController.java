@@ -25,7 +25,7 @@ public class IndexController {
     }
 
     @GetMapping("/admin")
-    public String getAdminHome(Model model) {
+    public String viewAdminMain(Model model) {
         model.addAttribute("articles", articleRepository.findAll());
         model.addAttribute("authors", authorRepository.findAll());
         model.addAttribute("topics", topicRepository.findAll());
