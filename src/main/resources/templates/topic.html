@@ -1,56 +1,62 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-    <head lang="en">
+    <head>
         <meta charset="UTF-8" />
-        <title>tr00news | manage topic</title>
+        <title>tr00news | admin</title>
     </head>
 
     <body>
+        <div>
+            <h1>Manage topic</h1>
+        </div>
 
-        <h1>Heavily under construction...</h1>
-
-        <section>
+        <div>
             <h2 th:text="${topic.name}">Topic name</h2>
 
-            <form th:action="@{/topics/{id}(id=${topic.id})}" th:method="POST">
-                Rename topic: <input type="text" name="name" id="name" th:value="${topic.name}" />
-                <input type="submit" value="Update" />
+            <form th:method="POST" th:action="@{/admin/topics/{id}(id=${topic.id})}">
+                <p>Rename topic: <input type="text" name="name" id="name" th:value="${topic.name}" />
+                <input type="submit" value="Update" /></p>
             </form>
-        </section>
+        </div>
 
-        <section>
-            <h3>Associate article with topic '<span th:text="${topic.name}">Topic name</span>'</h3>
+        <div>
+            <h3>Associate article with topic</h3>
 
-            <form th:action="@{/topics/{id}/articles(id=${topic.id})}" th:method="POST">
-                Pick article: <select name="articleId">
-                    <option th:each="article : ${articles}" th:value="${article.id}" th:text="${article.headline}">Article</option>
-                </select>
-                <input type="submit" value="Assign" id="add-to-article" />
+            <form th:method="POST" th:action="@{/admin/topics/{id}/articles(id=${topic.id})}">
+                <p>Pick article: 
+                    <select name="articleId">
+                        <option th:each="article : ${articles}" th:value="${article.id}" th:text="${article.headline}">Article</option>
+                    </select>
+                    <input type="submit" value="Associate" id="add-to-article" />
+                </p>
             </form>
-        </section>
+        </div>
 
-        <section>
+        <div>
             <h3>Topic is associated to following articles</h3>
 
             <table>
-                <thead><tr>
-                    <th>Article headline</th>
-                    <th></th>
-                </tr></thead>
-                <tbody><tr th:each="article : ${topic.articles}">
-                    <td th:text="${article.headline}">Article headline</td>
-                    <td><form th:method="DELETE" th:action="@{/topics/{topicId}/articles/{articleId}(topicId=${topic.id},articleId=${article.id})}">
-                        <input type="submit" value="Remove" th:id="${'delete-' + topic.id}" />
-                    </form></td>
-                </tr></tbody>
+                <thead>
+                    <tr>
+                        <th>Article headline</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="article : ${topic.articles}">
+                        <td th:text="${article.headline}">Article headline</td>
+                        <td><form th:method="DELETE" th:action="@{/admin/topics/{topicId}/articles/{articleId}(topicId=${topic.id},articleId=${article.id})}">
+                            <input type="submit" value="Remove" th:id="${'delete-' + topic.id}" />
+                        </form></td>
+                    </tr>
+                </tbody>
             </table>
-        </section>
+        </div>
 
-        <section>
-            <a th:href="@{/admin}">Back to admin main</a>
-        </section>
-
+        <div>
+            <p><a th:href="@{/admin}">Back to admin main</a></p>
+        </div>
     </body>
 
 </html>

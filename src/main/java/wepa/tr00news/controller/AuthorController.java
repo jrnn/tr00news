@@ -24,33 +24,33 @@ public class AuthorController {
     @Autowired
     private AuthorService authorService;
 
-    @GetMapping("/authors/{id}")
-    public String viewAuthor(Model model, @PathVariable Long id) {
+    @GetMapping("/admin/authors/{id}")
+    public String view(Model model, @PathVariable Long id) {
         model.addAttribute("author", authorRepository.getOne(id));
         model.addAttribute("articles", articleRepository.findUnassignedToAuthor(id));
 
         return "author";
     }
 
-    @PostMapping("/authors")
-    public String addAuthor(@RequestParam String name) {
+    @PostMapping("/admin/authors")
+    public String add(@RequestParam String name) {
         authorService.saveAuthor(name.trim());
 
         return "redirect:/admin";
     }
 
-    @PostMapping("/authors/{id}")
-    public String renameAuthor(
+    @PostMapping("/admin/authors/{id}")
+    public String rename(
             @PathVariable Long id,
             @RequestParam String name
     ) {
         authorService.updateAuthor(id, name.trim());
 
-        return "redirect:/authors/" + id;
+        return "redirect:/admin/authors/" + id;
     }
 
-    @PostMapping("/authors/{id}/articles")
-    public String assignArticleToAuthor(
+    @PostMapping("/admin/authors/{id}/articles")
+    public String assignArticle(
             @PathVariable Long id,
             @RequestParam Long articleId
     ) {
@@ -58,11 +58,11 @@ public class AuthorController {
         Article article = articleRepository.getOne(articleId);
         authorService.assignArticleToAuthor(author, article);
 
-        return "redirect:/authors/" + author.getId();
+        return "redirect:/admin/authors/" + author.getId();
     }
 
-    @DeleteMapping("/authors/{authorId}/articles/{articleId}")
-    public String removeArticleFromAuthor(
+    @DeleteMapping("/admin/authors/{authorId}/articles/{articleId}")
+    public String removeArticle(
             @PathVariable Long authorId,
             @PathVariable Long articleId
     ) {
@@ -70,7 +70,7 @@ public class AuthorController {
         Article article = articleRepository.getOne(articleId);
         authorService.removeArticleFromAuthor(author, article);
 
-        return "redirect:/authors/" + author.getId();
+        return "redirect:/admin/authors/" + author.getId();
     }
 
 }

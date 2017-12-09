@@ -24,33 +24,33 @@ public class TopicController {
     @Autowired
     private TopicService topicService;
 
-    @GetMapping("/topics/{id}")
-    public String viewTopic(Model model, @PathVariable Long id) {
+    @GetMapping("/admin/topics/{id}")
+    public String view(Model model, @PathVariable Long id) {
         model.addAttribute("topic", topicRepository.getOne(id));
         model.addAttribute("articles", articleRepository.findUnassignedToTopic(id));
 
         return "topic";
     }
 
-    @PostMapping("/topics")
-    public String addTopic(@RequestParam String name) {
+    @PostMapping("/admin/topics")
+    public String add(@RequestParam String name) {
         topicService.saveTopic(name.trim());
 
         return "redirect:/admin";
     }
 
-    @PostMapping("/topics/{id}")
-    public String renameTopic(
+    @PostMapping("/admin/topics/{id}")
+    public String rename(
             @PathVariable Long id,
             @RequestParam String name
     ) {
         topicService.updateTopic(id, name.trim());
 
-        return "redirect:/topics/" + id;
+        return "redirect:/admin/topics/" + id;
     }
 
-    @PostMapping("/topics/{id}/articles")
-    public String assignArticleToTopic(
+    @PostMapping("/admin/topics/{id}/articles")
+    public String assignArticle(
             @PathVariable Long id,
             @RequestParam Long articleId
     ) {
@@ -58,11 +58,11 @@ public class TopicController {
         Article article = articleRepository.getOne(articleId);
         topicService.assignArticleToTopic(topic, article);
 
-        return "redirect:/topics/" + topic.getId();
+        return "redirect:/admin/topics/" + topic.getId();
     }
 
-    @DeleteMapping("/topics/{topicId}/articles/{articleId}")
-    public String removeArticleFromTopic(
+    @DeleteMapping("/admin/topics/{topicId}/articles/{articleId}")
+    public String removeArticle(
             @PathVariable Long topicId,
             @PathVariable Long articleId
     ) {
@@ -70,7 +70,7 @@ public class TopicController {
         Article article = articleRepository.getOne(articleId);
         topicService.removeArticleFromTopic(topic, article);
 
-        return "redirect:/topics/" + topic.getId();
+        return "redirect:/admin/topics/" + topic.getId();
     }
 
 }

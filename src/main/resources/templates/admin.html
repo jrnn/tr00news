@@ -1,116 +1,124 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-    <head lang="en">
+    <head>
         <meta charset="UTF-8" />
         <title>tr00news | admin</title>
     </head>
 
     <body>
+        <div>
+            <h1>Admin home</h1>
+        </div>
 
-        <h1>Admin home | Heavily under construction...</h1>
-
-        <section>
+        <div>
             <h2>Articles</h2>
+        </div>
 
-            <div>
-                <p th:if="${#lists.isEmpty(articles)}">(No articles yet!)</p>
+        <div>
+            <p th:if="${#lists.isEmpty(articles)}">(No articles yet!)</p>
 
-                <table th:if="${not #lists.isEmpty(articles)}">
-                    <thead><tr>
+            <table th:if="${not #lists.isEmpty(articles)}">
+                <thead>
+                    <tr>
                         <th>Published on</th>
                         <th>Headline</th>
                         <th>Clicks</th>
                         <th></th>
-                    </tr></thead>
-                    <tbody><tr th:each="article : ${articles}">
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="article : ${articles}">
                         <td th:text="${article.date}">Published on</td>
                         <td th:text="${article.headline}">Headline</td>
                         <td th:text="${article.clickCount}">Number of clicks</td>
-                        <td><form th:action="@{/articles/{id}(id=${article.id})}" th:method="GET">
-                            <input type="submit" value="Edit" th:id="${'edit-' + article.id}"/>
+                        <td><form th:method="GET" th:action="@{/admin/articles/{id}(id=${article.id})}">
+                            <input type="submit" value="Edit" th:id="${'edit-article-' + article.id}" />
                         </form></td>
-                    </tr></tbody>
-                </table>
-            </div>
+                    </tr>
+                </tbody>
+            </table>
 
-            <div>
-                <form th:action="@{/articles}" th:method="GET">
-                    <input type="submit" value="Add new article" id="add-new" />
-                </form>
-            </div>
-        </section>
+            <form th:method="GET" th:action="@{/admin/articles}">
+                <input type="submit" value="Add new article" id="add-article" />
+            </form>
+        </div>
 
-        <section>
+        <div>
             <h2>Authors</h2>
+        </div>
 
-            <div>
-                <p th:if="${#lists.isEmpty(authors)}">(No authors yet!)</p>
+        <div>
+            <p th:if="${#lists.isEmpty(authors)}">(No authors yet!)</p>
 
-                <table th:if="${not #lists.isEmpty(authors)}">
-                    <thead><tr>
+            <table th:if="${not #lists.isEmpty(authors)}">
+                <thead>
+                    <tr>
                         <th>Author name</th>
                         <th>Articles</th>
                         <th>Total clicks</th>
                         <th></th>
-                    </tr></thead>
-                    <tbody><tr th:each="author : ${authors}">
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="author : ${authors}">
                         <td th:text="${author.name}">Author name</td>
                         <td th:text="${author.articleCount}">Number of articles</td>
                         <td th:text="${author.clickCount}">Number of clicks in articles</td>
-                        <td><form th:action="@{/authors/{id}(id=${author.id})}" th:method="GET">
-                            <input type="submit" value="Edit" th:id="${'edit-' + author.id}"/>
+                        <td><form th:method="GET" th:action="@{/admin/authors/{id}(id=${author.id})}">
+                            <input type="submit" value="Edit" th:id="${'edit-author-' + author.id}" />
                         </form></td>
-                    </tr></tbody>
-                </table>
-            </div>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-            <div>
-                <h3>Add new author</h3>
+        <div>
+            <h3>Add new author</h3>
 
-                <form th:action="@{/authors}" th:method="POST">
-                    Name: <input type="text" name="name" id="author-name" /><br/>
-                    <input type="submit" value="Add author" /><br/>
-                </form>
-            </div>
+            <form th:method="POST" th:action="@{/admin/authors}">
+                <p>Name: <input type="text" name="name" /></p>
+                <input type="submit" value="Add author" id="add-author" />
+            </form>
+        </div>
 
-        </section>
-
-        <section>
+        <div>
             <h2>Topics</h2>
+        </div>
 
-            <div>
-                <p th:if="${#lists.isEmpty(topics)}">(No topics yet!)</p>
+        <div>
+            <p th:if="${#lists.isEmpty(topics)}">(No topics yet!)</p>
 
-                <table th:if="${not #lists.isEmpty(topics)}">
-                    <thead><tr>
+            <table th:if="${not #lists.isEmpty(topics)}">
+                <thead>
+                    <tr>
                         <th>Topic name</th>
                         <th>Articles</th>
                         <th>Total clicks</th>
                         <th></th>
-                    </tr></thead>
-                    <tbody><tr th:each="topic : ${topics}">
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="topic : ${topics}">
                         <td th:text="${topic.name}">Topic name</td>
                         <td th:text="${topic.articleCount}">Number of articles</td>
                         <td th:text="${topic.clickCount}">Number of clicks in articles</td>
-                        <td><form th:action="@{/topics/{id}(id=${topic.id})}" th:method="GET">
-                            <input type="submit" value="Edit" th:id="${'edit-' + topic.id}"/>
+                        <td><form th:method="GET" th:action="@{/admin/topics/{id}(id=${topic.id})}">
+                            <input type="submit" value="Edit" th:id="${'edit-topic-' + topic.id}" />
                         </form></td>
-                    </tr></tbody>
-                </table>
-            </div>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-            <div>
-                <h3>Add new topic</h3>
+        <div>
+            <h3>Add new topic</h3>
 
-                <form th:action="@{/topics}" th:method="POST">
-                    Name: <input type="text" name="name" id="topic-name" /><br/>
-                    <input type="submit" value="Add topic" /><br/>
-                </form>
-            </div>
-
-        </section>
-
+            <form th:method="POST" th:action="@{/admin/topics}">
+                <p>Name: <input type="text" name="name" /></p>
+                <input type="submit" value="Add topic" id="add-topic" />
+            </form>
+        </div>
     </body>
 
 </html>

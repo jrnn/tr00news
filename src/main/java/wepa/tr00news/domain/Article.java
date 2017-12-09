@@ -1,7 +1,9 @@
 package wepa.tr00news.domain;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -54,6 +56,18 @@ public class Article extends AbstractPersistable<Long> {
 
     public int getClickCount() {
         return getClicks().size();
+    }
+
+    public List<String> getParagraphs() {
+        try {
+            return Arrays
+                    .stream(getBody().split("\n"))
+                    .filter(p -> !p.isEmpty())
+                    .collect(Collectors.toList());            
+        } catch (Exception e) {
+        }
+
+        return null;
     }
 
     public String getDate() {

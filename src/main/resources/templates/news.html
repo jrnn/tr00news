@@ -1,25 +1,30 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-    <head lang="en">
+    <head>
         <meta charset="UTF-8" />
         <title>tr00news | be tr00 -- resolutely reject fake news and alternative truths</title>
     </head>
 
     <body>
+        <div>
+            <h1>tr00news</h1>
+        </div>
 
-        <h1>Heavily under construction...</h1>
+        <div>
+            <h2>Latest news</h2>
+        </div>
 
-        <h2>Latest news</h2>
-        <section th:each="article : ${articles}">
+        <div th:each="article : ${articles}">
             <a th:href="@{/news/{id}/(id=${article.id})}">
                 <h3 th:text="${article.headline}">Headline</h3>
             </a>
-            <img th:if='${article.picture} != null' th:src="@{/articles/{id}/picture(id=${article.id})}"/><br/>
-            <img th:if='${article.picture} == null' th:src="@{/img/default.png}"/><br/>
+            <p>
+                <img th:if='${article.picture} != null' th:src="@{/pictures/{id}(id=${article.id})}" />
+                <img th:if='${article.picture} == null' th:src="@{/img/default.png}" />
+            </p>
             <p th:text="${article.lead}">Lead paragraph</p>
-        </section>
-
+        </div>
     </body>
 
 </html>

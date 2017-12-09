@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import wepa.tr00news.domain.Article;
 import wepa.tr00news.domain.Picture;
@@ -20,26 +19,26 @@ import wepa.tr00news.service.PictureService;
 public class ArticleController {
 
     @Autowired
+    private ArticleRepository articleRepository;
+    @Autowired
     private ArticleService articleService;
     @Autowired
     private PictureService pictureService;
-    @Autowired
-    private ArticleRepository articleRepository;
 
-    @GetMapping("/articles")
-    public String addArticle(Model model) {
+    @GetMapping("/admin/articles")
+    public String view(Model model) {
         return "article";
     }
 
-    @GetMapping("/articles/{id}")
-    public String editArticle(Model model, @PathVariable Long id) {
+    @GetMapping("/admin/articles/{id}")
+    public String edit(Model model, @PathVariable Long id) {
         model.addAttribute("article", articleRepository.getOne(id));
 
         return "article";
     }
 
-    @PostMapping("/articles")
-    public String saveArticle(
+    @PostMapping("/admin/articles")
+    public String add(
             @ModelAttribute Article article,
             @RequestParam(value = "file") MultipartFile file
     ) {
@@ -47,11 +46,11 @@ public class ArticleController {
         Picture picture = pictureService.savePicture(file);
         articleService.assignPictureToArticle(article, picture);
 
-        return "redirect:/articles/" + article.getId();
+        return "redirect:/admin/articles/" + article.getId();
     }
 
-    @PostMapping("/articles/{id}")
-    public String updateArticle(
+    @PostMapping("/admin/articles/{id}")
+    public String update(
             @PathVariable Long id,
             @ModelAttribute Article article,
             @RequestParam(value = "file") MultipartFile file
@@ -60,21 +59,7 @@ public class ArticleController {
         Picture picture = pictureService.savePicture(file);
         articleService.assignPictureToArticle(article, picture);
 
-        return "redirect:/articles/" + article.getId();
-    }
-
-    @GetMapping(
-            path = "/articles/{id}/picture",
-            produces = {"image/jpg", "image/jpeg", "image/png", "image/gif", "image/bmp"}
-    )
-    @ResponseBody
-    public byte[] viewPicture(@PathVariable Long id) {
-        try {
-            return articleRepository.getOne(id).getPicture().getContent();
-        } catch (Throwable t) {
-        }
-
-        return null;
+        return "redirect:/admin/articles/" + article.getId();
     }
 
 }
