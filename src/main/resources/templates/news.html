@@ -14,20 +14,22 @@
   <body>
     <header th:replace="fragments/news_nav :: news_nav">News header</header>
 
-    <div class="dark-green-box">
-      <h1 class="container">tr00news</h1>
+    <div class="dark-green-box paddington">
+      <h1 class="container">tr00news | Latest news</h1>
     </div>
 
-    <section class="white-box">
-      <div th:each="article : ${articles}" class="media container moustache-wizards">
-        <img th:if='${article.picture} != null' th:src="@{/pictures/{id}(id=${article.id})}" class="mr-4 pic4ants" />
-        <img th:if='${article.picture} == null' th:src="@{/img/default.png}" class="pic4ants mr-4 " />
-        <a th:href="@{/news/{id}/(id=${article.id})}">
-          <div class="media-body">
-            <h4 th:text="${article.headline}">Headline</h4>
-            <p th:text="${article.lead}" class="lead">Lead paragraph</p>
-          </div>
-        </a>
+    <section class="paddington">
+      <div th:each="article : ${articles}" class="container">
+        <div class="media moustache-wizards paddington">
+          <img th:if='${article.picture} != null' th:src="@{/pictures/{id}(id=${article.id})}" class="mr-4 img-for-ants align-self-center" />
+          <img th:if='${article.picture} == null' th:src="@{/img/default.png}" class="mr-4 img-for-ants align-self-center" />
+          <a th:href="@{/news/{id}/(id=${article.id})}">
+            <div class="media-body">
+              <h4 th:text="${article.headline}">Headline</h4>
+              <p th:text="${article.lead}" class="lead">Lead paragraph</p>
+            </div>
+          </a>
+        </div>
       </div>
     </section>
 

@@ -2,49 +2,67 @@ html {
     height : 100%;
 }
 body {
-    color : #212121;
+    color : #171b19;
     background-color: #fbfdfc;
     position : relative;
     min-height : 100%;
     padding-bottom : 6rem;
 }
 header {
-    color : #fbfdfc;
-    background-color : #212121;
+    color : #b3b7b5;
+    background-color : #171b19;
     padding : 12px;
 }
 footer {
     position : absolute;
     bottom : 0;
     width : 100%;
-    color : #bcc2bf;
-    background-color : #212121;
+    color : #b3b7b5;
+    background-color : #171b19;
     padding-top : 12px;
+}
+.paddington {
+    padding-top: 18px;
+    padding-bottom: 18px;
 }
 .dark-green-box {
     color : #fbfdfc;
-    background-color : #374d42;
-    padding : 24px 12px;
-}
-.grayish-box {
-    background-color : #bcc2bf;
-    padding : 12px;
-}
-.white-box {
-    background-color: #fbfdfc;
-    padding : 24px 12px;
+    background-color : #35493f;
 }
 .whiteish-box {
-    background-color : #edf5f1;
-    padding : 12px;
+    background-color : #dfede6;
 }
 .moustache-wizards {
-    padding-top : 12px;
-    padding-bottom : 24px;
     border-bottom : thin solid;
-    border-color : #808080;
+    border-color : #b3b7b5;
 }
-.pic4ants {
+.img-for-ants {
     width : 100%;
-    max-width : 400px;
+    max-width : 40%;
+}
+a.header:link, a.header:visited {
+    color : #b3b7b5;
+}
+a.header:hover, a.header:active {
+    color : #fbfdfc;
+    text-decoration : none;
+}
+a:link, a:visited {
+    color : #171b19;
+}
+a:hover, a:active {
+    color : #589b85;
+    text-decoration : none;
+}
+table.admin-nav {
+    width : 360px;
+}
+.submit-link {
+    background-color : transparent;
+    border : none;
+    color : #b3b7b5;
+    cursor : pointer;
+}
+.submit-link:hover {
+    color : #fbfdfc;
 }

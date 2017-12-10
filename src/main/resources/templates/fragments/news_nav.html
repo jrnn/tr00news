@@ -9,15 +9,13 @@
   <body>
     <header th:fragment="news_nav">
       <div class="container" align="center">
-        <p>
-          <a th:href="@{/news}">Latest</a> | 
-          <span th:each="topic : ${topics}">
-            <a th:href="@{/news/topics/{id}(id=${topic.id})}">
-              <span th:text="${topic.name}">Topic</span>
-            </a> | 
-          </span>
-          <a th:href="@{/admin}">Admin</a>
-        </p>
+        <a th:href="@{/news}" class="header">Latest</a> | 
+        <span th:each="topic : ${topics}">
+          <a th:href="@{/news/topics/{id}(id=${topic.id})}" class="header">
+            <span th:text="${topic.name}">Topic</span>
+          </a> | 
+        </span>
+        <a th:href="@{/admin}" class="header">Admin</a>
       </div>
     </header>
   </body>

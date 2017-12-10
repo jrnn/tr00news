@@ -1,66 +1,71 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-    <head>
-        <meta charset="UTF-8" />
-        <title>tr00news | admin</title>
-    </head>
+  <head>
+    <title>tr00news | admin</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+          crossorigin="anonymous" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" />
+  </head>
 
-    <body>
-        <header th:replace="fragments/admin_nav :: admin_nav">Admin header</header>
+  <body>
+    <header th:replace="fragments/admin_nav :: admin_nav">Admin header</header>
 
-        <div>
-            <h1>Manage author</h1>
+    <div class="dark-green-box paddington">
+      <h2 class="container">Manage author | <span th:text="${author.name}">Author name</span></h2>
+    </div>
+
+    <div class="container paddington">
+      <form th:method="POST" th:action="@{/admin/authors/{id}(id=${author.id})}">
+        <div class="form-group">
+          <label for="name">Rename author</label>
+          <input type="text" th:value="${author.name}" class="form-control" name="name" id="name" />
         </div>
+        <input type="submit" value="Update" />
+      </form>
+    </div>
 
-        <div>
-            <h2 th:text="${author.name}">Author name</h2>
+    <div class="whiteish-box paddington">
+      <h3 class="container">Assign article(s) to author</h3>
+    </div>
 
-            <form th:method="POST" th:action="@{/admin/authors/{id}(id=${author.id})}">
-                <p>Rename author: <input type="text" name="name" id="name" th:value="${author.name}" />
-                <input type="submit" value="Update" /></p>
-            </form>
+    <div class="container paddington">
+      <form th:method="POST" th:action="@{/admin/authors/{id}/articles(id=${author.id})}">
+        <div class="form-group">
+          <label for="dropdown">Pick article</label>
+          <select name="articleId" id="dropdown" class="form-control">
+            <option th:each="article : ${articles}" th:value="${article.id}" th:text="${article.headline}">Article</option>
+          </select>
         </div>
+        <input type="submit" value="Assign" />
+      </form>
+    </div>
 
-        <div>
-            <h3>Assign article to author</h3>
+    <div class="container paddington">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Noted as author in</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="article : ${author.articles}">
+            <td th:text="${article.headline}">Article headline</td>
+            <td>
+              <form th:method="DELETE" th:action="@{/admin/authors/{authorId}/articles/{articleId}(authorId=${author.id},articleId=${article.id})}">
+                <input type="submit" value="Remove" th:id="${'delete-' + article.id}" />
+              </form>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-            <form th:method="POST" th:action="@{/admin/authors/{id}/articles(id=${author.id})}">
-                <p>Pick article: 
-                    <select name="articleId">
-                        <option th:each="article : ${articles}" th:value="${article.id}" th:text="${article.headline}">Article</option>
-                    </select>
-                    <input type="submit" value="Assign" id="add-to-article" />
-                </p>
-            </form>
-        </div>
-
-        <div>
-            <h3>Noted as author in following articles</h3>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>Article headline</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="article : ${author.articles}">
-                        <td th:text="${article.headline}">Article headline</td>
-                        <td><form th:method="DELETE" th:action="@{/admin/authors/{authorId}/articles/{articleId}(authorId=${author.id},articleId=${article.id})}">
-                            <input type="submit" value="Remove" th:id="${'delete-' + article.id}" />
-                        </form></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div>
-            <p><a th:href="@{/admin}">Back to admin main</a></p>
-        </div>
-
-        <footer th:replace="fragments/footer :: footer">Standard footer</footer>
-    </body>
+    <footer th:replace="fragments/footer :: footer">Standard footer</footer>
+  </body>
 
 </html>

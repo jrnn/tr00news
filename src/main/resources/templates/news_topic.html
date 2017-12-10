@@ -14,17 +14,19 @@
   <body>
     <header th:replace="fragments/news_nav :: news_nav">News header</header>
 
-    <div class="dark-green-box">
+    <div class="dark-green-box paddington">
       <h1 class="container">tr00news | <span th:text="${topic.name}">Topic</span></h1>
     </div>
 
-    <section class="white-box">
-      <div th:each="article : ${articles}" class="container moustache-wizards">
-        <a th:href="@{/news/{id}/(id=${article.id})}">
-          <h4 th:text="${article.headline}">Headline</h4>
-          <small th:text="${article.date}">Published on</small>
-          <p th:text="${article.lead}" class="lead">Lead paragraph</p>
-        </a>
+    <section class="paddington">
+      <div th:each="article : ${articles}" class="container">
+        <div class="moustache-wizards paddington">
+          <a th:href="@{/news/{id}/(id=${article.id})}">
+            <h4 th:text="${article.headline}">Headline</h4>
+            <small th:text="${article.date}">Published on</small>
+            <p th:text="${article.lead}" class="lead">Lead paragraph</p>
+          </a>
+        </div>
       </div>
     </section>
 

@@ -14,20 +14,20 @@
   <body>
     <header th:replace="fragments/news_nav :: news_nav">News header</header>
 
-    <div class="dark-green-box">
+    <div class="dark-green-box paddington">
       <h3 th:text="${article.headline}" class="container" align="center">Headline</h3>
     </div>
 
-    <section class="white-box">
+    <section class="paddington">
       <div class="container" align="center">
         <img th:if='${article.picture} != null' th:src="@{/pictures/{id}(id=${article.id})}" class="img-fluid" />
         <img th:if='${article.picture} == null' th:src="@{/img/default.png}" class="img-fluid" />
       </div>
     </section>
 
-    <section class="whiteish-box">
+    <section class="whiteish-box paddington">
       <div class="container" align="center">
-        <h5 class="moustache-wizards">
+        <h5 class="moustache-wizards paddington">
           <span th:text="${article.date}">Date</span>
           <span th:each="author : ${article.authors}" th:text="${' | ' + author.name}">Authors</span>
         </h5>
@@ -38,7 +38,7 @@
       </div>
     </section>
 
-    <section class="white-box">
+    <section class="paddington">
       <div class="container" align="justify">
         <p th:each='paragraph : ${article.paragraphs}' th:text="${paragraph}" class="lead">Running text</p>
       </div>

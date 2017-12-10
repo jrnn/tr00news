@@ -14,16 +14,16 @@
   <body>
     <header th:replace="fragments/admin_nav :: admin_nav">Admin header</header>
 
-    <div class="dark-green-box">
+    <div class="dark-green-box paddington">
       <h1 class="container">Add/edit article</h1>
     </div>
 
     <section th:if="${article == null}">
-      <div class="grayish-box">
+      <div class="whiteish-box paddington">
         <h2 class="container">Add new article</h2>
       </div>
 
-      <div class="white-box">
+      <div class="paddington">
         <form class="container" th:method="POST" th:action="@{/admin/articles}" enctype="multipart/form-data">
           <div class='form-group'>
             <label for="headline">Headline</label>
@@ -48,11 +48,11 @@
     </section>
 
     <section th:if="${article != null}">
-      <div class="grayish-box">
+      <div class="whiteish-box paddington">
         <h2 class="container">Edit article</h2>
       </div>
 
-      <div class="white-box">
+      <div class="paddington">
         <form class="container" th:method="POST" th:action="@{/admin/articles/{id}(id=${article.id})}" enctype="multipart/form-data">
           <div class='form-group'>
             <label for="headline">Headline</label>
@@ -75,7 +75,7 @@
         </form>
       </div>
 
-      <div class="white-box">
+      <div class="paddington">
         <p class="container">Current picture:<br/>
           <img th:if='${article.picture} != null' th:src="@{/pictures/{id}(id=${article.id})}" class="img-fluid img-thumbnail" />
           <img th:if='${article.picture} == null' th:src="@{/img/default.png}" class="img-fluid img-thumbnail" />

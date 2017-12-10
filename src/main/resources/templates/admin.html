@@ -14,15 +14,15 @@
   <body>
     <header th:replace="fragments/admin_nav :: admin_nav">Admin header</header>
 
-    <div class="dark-green-box">
+    <div class="dark-green-box paddington">
       <h1 class="container">Admin home</h1>
     </div>
 
-    <div class="grayish-box">
+    <div class="whiteish-box paddington">
       <h2 class="container">Articles</h2>
     </div>
 
-    <section class="white-box">
+    <section class="paddington">
       <div class="container">
         <p th:if="${#lists.isEmpty(articles)}" align="center">(No articles yet!)</p>
 
@@ -49,17 +49,17 @@
           </tbody>
         </table>
 
-        <form th:method="GET" th:action="@{/admin/articles}">
+        <form th:method="GET" th:action="@{/admin/articles}" class="paddington">
           <input type="submit" value="Add new article" id="add-article" />
         </form>
       </div>
     </section>
 
-    <div class="grayish-box">
+    <div class="whiteish-box paddington">
       <h2 class="container">Authors</h2>
     </div>
 
-    <section class="white-box">
+    <section class="paddington">
       <div class="container">
         <p th:if="${#lists.isEmpty(authors)}" align="center">(No authors yet!)</p>
 
@@ -87,20 +87,26 @@
         </table>
       </div>
 
-      <form class="container" th:method="POST" th:action="@{/admin/authors}">
-        <div class="form-group">
-          <label for="author-name">Author name</label>
-          <input type="text" class="form-control" name="name" id="author-name" />
+      <form th:method="POST" th:action="@{/admin/authors}">
+        <div class="form-group container paddington">
+          <div class="row">
+            <div class="col">
+              <input type="text" class="form-control" name="name" placeholder="Name of new author" />
+            </div>
+            <div class="col">
+              <input type="submit" value="Add new author" id="add-author" />
+            </div>
+          </div>
         </div>
-        <input type="submit" value="Add new author" id="add-author" />
       </form>
+
     </section>
 
-    <div class="grayish-box">
+    <div class="whiteish-box paddington">
       <h2 class="container">Topics</h2>
     </div>
 
-    <section class="white-box">
+    <section class="paddington">
       <div class="container">
         <p th:if="${#lists.isEmpty(topics)}" align="center">(No topics yet!)</p>
 
@@ -128,12 +134,17 @@
         </table>
       </div>
 
-      <form class="container" th:method="POST" th:action="@{/admin/topics}">
-        <div class="form-group">
-          <label for="topic-name">Topic name</label>
-          <input type="text" class="form-control" name="name" id="topic-name" />
+      <form th:method="POST" th:action="@{/admin/topics}">
+        <div class="form-group container paddington">
+          <div class="row">
+            <div class="col">
+              <input type="text" class="form-control" name="name" placeholder="Name of new topic" />
+            </div>
+            <div class="col">
+             <input type="submit" value="Add new topic" id="add-topic" />
+            </div>
+          </div>
         </div>
-        <input type="submit" value="Add new topic" id="add-topic" />
       </form>
     </section>
 

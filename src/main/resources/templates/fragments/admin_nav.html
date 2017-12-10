@@ -8,13 +8,21 @@
 
   <body>
     <header th:fragment="admin_nav">
-      <div class="container" align="center">
-        <p>
-          <a th:href="@{/news}">Back to news</a> | 
-          <a th:href="@{/admin}">Admin home</a> | 
-          <a th:href="@{/logout}">Logout</a>
-        </p>
-      </div>
+      <table class="container admin-nav" align="center">
+        <tr>
+          <td>
+            <a th:href="@{/news}" class="header">Back to news</a>
+          </td>
+          <td>
+            <a th:href="@{/admin}" class="header">Admin home</a>
+          </td>
+          <td>
+            <form th:method="POST" th:action="@{/logout}">
+              <input type="submit" class="submit-link" value="Logout" />
+            </form>
+          </td>
+        </tr>
+      </table>
     </header>
   </body>
 

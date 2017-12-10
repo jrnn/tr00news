@@ -7,11 +7,11 @@
   </head>
 
   <body>
-    <div th:fragment="news_recommended" class="whiteish-box">
+    <div th:fragment="news_recommended" class="whiteish-box paddington">
       <div class="container">
         <div class="row">
           <div class="col">
-            <h3 class="moustache-wizards">Most popular</h3>
+            <h3 class="moustache-wizards paddington">Most popular</h3>
             <div th:each="article : ${popular}">
               <a th:href="@{/news/{id}(id=${article.id})}">
                 <small th:text="${article.date}">Date</small>
@@ -20,7 +20,7 @@
             </div>
           </div>
           <div class="col">
-            <h3 class="moustache-wizards">Most recent</h3>
+            <h3 class="moustache-wizards paddington">Most recent</h3>
             <div th:each="article : ${latest}">
               <a th:href="@{/news/{id}(id=${article.id})}">
                 <small th:text="${article.date}">Date</small>
