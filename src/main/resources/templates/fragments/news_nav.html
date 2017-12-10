@@ -10,9 +10,9 @@
     <header th:fragment="news_nav">
       <div class="container" align="center">
         <p>
-          <a th:href="@{/news}">Tuoreimmat</a> | 
+          <a th:href="@{/news}">Latest</a> | 
           <span th:each="topic : ${topics}">
-            <a th:href="@{/admin/topics/{id}(id=${topic.id})}">
+            <a th:href="@{/news/topics/{id}(id=${topic.id})}">
               <span th:text="${topic.name}">Topic</span>
             </a> | 
           </span>

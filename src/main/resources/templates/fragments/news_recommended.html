@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+    <title></title>
+    <meta charset="UTF-8" />
+  </head>
+
+  <body>
+    <div th:fragment="news_recommended" class="whiteish-box">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <h3 class="moustache-wizards">Most popular</h3>
+            <div th:each="article : ${popular}">
+              <a th:href="@{/news/{id}(id=${article.id})}">
+                <small th:text="${article.date}">Date</small>
+                <p th:text="${article.headline}">Headline</p>
+              </a>
+            </div>
+          </div>
+          <div class="col">
+            <h3 class="moustache-wizards">Most recent</h3>
+            <div th:each="article : ${latest}">
+              <a th:href="@{/news/{id}(id=${article.id})}">
+                <small th:text="${article.date}">Date</small>
+                <p th:text="${article.headline}">Headline</p>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+
+</html>

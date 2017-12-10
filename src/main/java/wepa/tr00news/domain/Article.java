@@ -58,6 +58,13 @@ public class Article extends AbstractPersistable<Long> {
         return getClicks().size();
     }
 
+    public int getRecentClicks() {
+        return (int) getClicks()
+                .stream()
+                .filter(c -> c.isRecent())
+                .count();
+    }
+
     public List<String> getParagraphs() {
         try {
             return Arrays

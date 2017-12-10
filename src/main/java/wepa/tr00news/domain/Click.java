@@ -35,4 +35,10 @@ public class Click extends AbstractPersistable<Long> {
     @JoinColumn(name = "article_id")
     private Article article;
 
+    public boolean isRecent() {
+        LocalDateTime weekAgo = LocalDateTime.now().minusWeeks(1);
+
+        return getHappenedOn().isAfter(weekAgo);
+    }
+
 }

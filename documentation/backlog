@@ -23,13 +23,12 @@ ________________________________________________________________________________
   [X] [171204] assigning authors and topics to news articles
   [X] [171202] listing five latest news articles on landing page
   [X] [171205] viewing individual news article
-  [ ] [      ] listing most read and latest articles (without pictures)
-  [ ] [      ] listing articles by topic/author
+  [X] [171210] listing most read and latest articles (without pictures)
+  [X] [171210] listing articles by topic/author
   [X] [171205] tracking clicks per article
-  [X] [171209] navigation bar incl. topics
+  [X] [171209] news side navigation bar incl. topics
+  [X] [171210] admin side navigation bar incl. logout
   [X] [171209] css styling
-  [ ] [      ] admin side navigation bar incl. logout
-  [ ] [      ] ...
 
 
 
@@ -37,11 +36,13 @@ ________________________________________________________________________________
 IMPROVEMENT IDEAS
 ________________________________________________________________________________
 
-  [ ] [      ] unit testing
+  [ ] [      ] unit testing / automatic testing missing entirely!
   [ ] [      ] ability to search for news articles by keyword(s)
-  [ ] [      ] ...
-  [ ] [      ] ...
-  [ ] [      ] ...
+  [ ] [      ] pageation of results (needed when number of articles grows)
+  [ ] [      ] management of authors and topics is clumsy, should be integrated
+               to the same view as editing articles
+  [ ] [      ] news main page totally does not work on small screens
+  [ ] [      ] what else ...?
 
 
 

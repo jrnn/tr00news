@@ -8,6 +8,9 @@ import wepa.tr00news.domain.Article;
 
 public interface ArticleRepository extends JpaRepository<Article, Long> {
 
+    @Query("SELECT a FROM Article a JOIN a.topics t WHERE t.id = :id")
+    List<Article> findAllByTopic(@Param("id")Long topicId);
+
     @Query("SELECT a FROM Article a WHERE a.id NOT IN " +
             "( SELECT ar.id FROM Article ar JOIN ar.authors au WHERE au.id = :id )")
     List<Article> findUnassignedToAuthor(@Param("id") Long authorId);
