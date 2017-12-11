@@ -13,150 +13,179 @@ implemented ...
 REQUIREMENTS
 ________________________________________________________________________________
 
-  [X] [171201] setting up deployment pipeline (GitHub > Travis > Heroku)
-  [X] [171208] setting up production profile and PostgreSQL in Heroku
-  [X] [171209] simple authentication for admin side
-  [X] [171201] adding news articles
-  [X] [171202] editing news articles
-  [X] [171204] adding authors
-  [X] [171204] adding topics
-  [X] [171204] assigning authors and topics to news articles
-  [X] [171202] listing five latest news articles on landing page
-  [X] [171205] viewing individual news article
-  [X] [171210] listing most read and latest articles (without pictures)
-  [X] [171210] listing articles by topic/author
-  [X] [171205] tracking clicks per article
-  [X] [171209] news side navigation bar incl. topics
-  [X] [171210] admin side navigation bar incl. logout
-  [X] [171209] css styling
+  [X] [171201] general : deployment pipeline (GitHub > Travis > Heroku)
+  [X] [171208] general : production profile and PostgreSQL in Heroku
+  [X] [171209] admin : simple authentication
+  [X] [171201] admin : adding news articles
+  [X] [171202] admin : attaching pictures to articles
+  [X] [171202] admin : editing news articles
+  [X] [171204] admin : managing authors and topics
+  [X] [171204] admin : assigning articles to authors and topics
+  [X] [171202] news : listing five latest news articles on landing page
+  [X] [171205] news : viewing individual news article
+  [X] [171210] news : listing articles by topic
+  [X] [171205] admin : tracking clicks per article and author/topic
+  [X] [171210] news : listing most read and latest articles (without pictures)
+  [X] [171209] general : navigation bars, incl. topics and logout
+  [X] [171209] general : css styling
 
 
 
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
-IMPROVEMENT IDEAS
+KNOWN ISSUES AND IMPROVEMENT NEEDS
 ________________________________________________________________________________
 
-  [ ] [      ] unit testing / automatic testing missing entirely!
-  [ ] [      ] ability to search for news articles by keyword(s)
-  [ ] [      ] pageation of results (needed when number of articles grows)
-  [ ] [      ] management of authors and topics is clumsy, should be integrated
-               to the same view as editing articles
-  [ ] [      ] news main page totally does not work on small screens
-  [ ] [      ] what else ...?
+  [ ] unit testing / automatic testing is missing entirely !!
+  [ ] scalability : ability to search for news articles by keyword(s)
+  [ ] scalability : pageation of lists / search results
+  [ ] scalability : allow deleting of Authors and Topics(?)
+  [ ] usability : sorting the article, author and topic tables in admin home
+      e.g. by headline (alphabetically) or by # of clicks
+  [ ] usability : management of authors and topics is clumsy, should be
+      integrated to the same view as adding/editing articles
+  [ ] usability : news main page looks like shit on small screens
+  [ ] usability : showing Click statistics on a time series
+  [ ] usability : ability for users to comment individual news articles
+  [ ] ( ...something else? )
 
 
 
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
-STORIES / TASKS BREAKDOWN
+TASKS BREAKDOWN
 ________________________________________________________________________________
 
-[001] "As admin, I can add news articles, so that ..."
-
-  [X] create "article.html" with form for posting Articles and Pictures
-  [X] create entities and repositories for "Article", "Picture"
-  [X] "ArticleController" handles GET and POST requests to "/articles"
-  [X] "ArticleService" validates and saves Articles
-  [X] "ArticleService" assigns Pictures to Articles
-  [X] "PictureService" converts and saves inbound Pictures
-  [ ] ...
-
-‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
-[002] "As reader, I can immediately see what's latest news on the landing page,
-      so that ..."
-
-  [X] create "news.html" listing Articles (show headline, lead, and picture)
-  [X] "NewsController" handles GET requests to "/news"
-  [X] "ArticleController" handles GET requests to "/articles/{id}/picture" (for
-      viewing Pictures)
-  [X] "NewsController" fetches only 5 latest Articles in descending order
-  [ ] ...
-
-‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
-[003] "As admin, I can edit news articles, so that ..."
-
-  [X] extend "article.html" with prefilled form for editing and posting an
-      existing Article
-  [X] "ArticleController" handles GET and POST requests to "/articles/{id}"
-  [X] "ArticleService" updates existing Articles (incl. Picture replacement)
-  [X] show placeholder image for Articles without assigned Picture
-  [ ] ...
-
-‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
-[004] "As admin, I can manage authors and their ownership of articles, so that
-      ..."
-
-  [X] create "admin.html" listing all Articles and Authors, with links to their
-      respective subpages, and with form for adding Authors
-  [X] create "author.html" listing Articles assigned to selected Author, and
-      form for assigning/removing Articles to/from that Author
-  [X] create entity and repository for "Author"
-  [X] update "Article" entity with bidirectional ManyToMany mapping to "Author"
-  [X] "IndexController" handles GET requests to "/admin"
-  [X] "AuthorController" handles various GET, POST and DELETE requests to
-      "/authors" and its subaddresses
-  [X] "AuthorService" validates, saves, and updates Authors
-  [X] "AuthorService" assigns/decouples Articles to/from Authors
-  [X] "ArticleRepository" knows custom query "findUnassignedToAuthor"
-  [ ] ( should deleting Authors be allowed? )
-  [ ] ...
-
-‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
-[005] "As admin, I can define topics and use them for categorizing articles, so
-      that ..."
-
-  [X] extend "admin.html" with list of and form for creating Topics
-  [X] create "topic.html" listing Articles associated with selected Topic, and
-      form for assigning/removing Articles to/from that Topic
-  [X] create entity and repository for "Topic"
-  [X] update "Article" entity with bidirectional ManyToMany mapping to "Topic"
-  [X] "TopicController" handles various GET, POST and DELETE requests to
-      "/topics" and its subaddresses
-  [X] "TopicService" validates, saves, and updates Authors
-  [X] "TopicService" assigns/decouples Articles to/from Authors
-  [X] "ArticleRepository" knows custom query "findUnassignedToTopic"
-  [ ] ( should deleting Topics be allowed? )
-  [ ] ...
-
-‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
-[006] "As reader, I can click on an article of interest to see the full content,
-      so that ..."
-
-  [X] create "article_view.html" showing an individual Article's contents
-  [X] "NewsController" handles GET requests to "/news/{id}"
-  [X] clicking on any Article's headline opens that Article in detail
-  [ ] ...
-
-‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
-[007] "As admin, I can see how many clicks each Article gets, so that ..."
-
-  [X] create entity and repository for "Click"
-  [X] update "Article" entity with bidirectional OneToMany mapping to "Click"
-  [X] "ClickService" identifies and saves Clicks by session and time
-  [X] "NewsController" calls "ClickService" on GET requests to "/news/{id}"
-  [X] Articles can count their clicks, and Authors/Topics can count the
-      aggregate clicks of their associated Articles
-  [ ] ...
-
-‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
-[008] Admin authentication
+[001] admin : simple authentication
 
   [X] "DefaultSecurityConfiguration" permits all requests for all users, and
       enables use of H2 console
-  [X] "ProductionSecurityConfiguration" limits /admin* only to ADMIN authority,
-      permits /news* and /pictures* for all, and and handles login/logout in a
-      smart way for all users
+  [X] "ProductionSecurityConfiguration" restricts access to "/admin" and all
+      its subfolders only to authenticated users
   [X] "ProductionSecurityConfiguration" handles in-memory authentication for
-      "admin" user taking heroku config var TR00NEWS_PASSWORD as password
-  [X] "IndexController" redirects either to /news or /admin depending on user's
-      authentication
+      "admin" user taking Heroku environment variable as password
+  [X] "ProductionSecurityConfiguration" handles login and logout requests in a
+      smart fashion
+  [X] "IndexController" redirects either to "/news" or "/admin" depending on
+      user's authentication
 
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
-[009] "As ..., I can ..., so that ..."
+[002] admin : adding news articles
 
-  [ ] ...
-  [ ] ...
-  [ ] ...
+  [X] "admin.html" lists all Articles
+  [X] "admin_article.html" has form for posting Articles
+  [X] entity and repository for "Article"
+  [X] "IndexController" handles GET requests to "/admin"
+  [X] "ArticleController" handles GET and POST requests to "/admin/articles"
+  [X] "ArticleService" validates and saves Articles
 
+‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+[003] admin : attaching pictures to articles
 
+  [X] "admin_article.html" has filepicker for choosing and posting images
+  [X] entity and repository for "Picture"
+  [X] update "Article" entity with bidirectional OneToOne mapping to "Picture"
+  [X] "PictureService" validates, converts and saves inbound Pictures
+  [X] "ArticleService" assigns Pictures to Articles (previous Picture is
+      replaced to avoid 1-to-1 violations)
+  [X] "PictureController" handles GET requests to "/pictures/{articleId}"
+  [X] show placeholder image for Articles without assigned Picture
 
-################################################################################
+‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+[004] admin : editing news articles
+
+  [X] "admin_article.html" acts differently whether an Article is passed in the
+      model or not (i.e. adding new from scratch vs. editing existing one)
+  [X] "ArticleController" handles GET and POST requests to "/admin/articles/
+      {id}"
+  [X] "ArticleService" validates and updates (existing) Articles
+
+‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+[005] admin : managing authors and topics
+
+  [X] "admin.html" lists all Authors and Topics as subsections, with simple
+      forms below for adding new
+  [X] "admin_author.html" shows individual Author and has form for renaming
+  [X] "admin_topic.html" shows individual Topic and has form for renaming
+  [X] entities and repositories for "Author", "Topic"
+  [X] "AuthorController" handles GET and POST requests to "/admin/authors" and
+      "/admin/authors/{id}"
+  [X] "TopicController" handles GET and POST requests to "/admin/topics" and
+      "/admin/topics/{id}"
+  [X] "AuthorService" validates, saves and updates Authors
+  [X] "TopicService" validates, saves and updates Topics
+
+‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+[006] admin : assigning articles to authors and topics
+
+  [X] "admin_author.html" lists Articles assigned to one Author, with controls
+      for assigning/removing Articles to/from that Author
+  [X] "admin_topic.html" lists Articles assigned to one Topic, with controls for
+      assigning/removing Articles to/from that Topic
+  [X] update "Article" entity with bidirectional ManyToMany mappings to Author
+      and Topic
+  [X] "AuthorController" handles POST and DELETE requests to "/admin/authors/
+      {id}/articles/*"
+  [X] "TopicController" handles POST and DELETE requests to "/admin/topics/{id}
+      /articles/*"
+  [X] "AuthorService" assigns/decouples Articles to/from Authors
+  [X] "TopicService" assigns/decouples Articles to/from Topics
+  [X] "ArticleRepository" can execute custom query "findUnassignedToAuthor"
+  [X] "ArticleRepository" can execute custom query "findUnassignedToTopic"
+
+‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+[007] news : listing five latest news articles on landing page
+
+  [X] "news.html" lists Articles showing headline, lead and picture
+  [X] "NewsController" handles GET requests to "/news"
+  [X] "NewsService" fetches n latest Articles in descending order (in this case
+      n = 5, but could be any integer)
+
+‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+[008] news : viewing individual news article
+
+  [X] "news_article.html" shows the full content of selected Article
+  [X] "NewsController" handles GET requests to "/news/{id}"
+  [X] clicking on any Article's headline/lead opens that Article in detail
+
+‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+[009] news : listing articles by topic
+
+  [X] "news_topic.html" lists Articles for a specific Topic
+  [X] "NewsController" handles GET requests to "/news/topics/{id}"
+  [X] "NewsService" fetches all Articles associated with a given Topic in
+      descending order by publication date
+  [X] "ArticleRepository" can execute custom query "findAllByTopic"
+
+‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+[010] admin : tracking clicks per article and author/topic
+
+  [X] entity and repository for "Click"
+  [X] update "Article" entity with bidirectional OneToMany mapping to Click
+  [X] "ClickService" identifies and saves Clicks by http session and time
+  [X] "NewsController" calls "ClickService" on GET requests to "/news/{id}"
+  [X] Articles can count their clicks, and Authors/Topics can count the
+      aggregate clicks of their associated Articles
+  [X] "admin.html" shows number of Clicks for each Article, Author and Topic
+
+‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+[011] news : listing most read and latest articles (without pictures)
+
+  [X] "fragments/news_recommended.html" lists "Most popular" (by # of Clicks)
+      and "Most recent" (by publication date) Articles side by side
+  [X] all "news**.html" files incorporate the recommendation lists at bottom
+  [X] "Click" entity can tell whether it is "recent" or not (happened no earlier
+      than today minus one week)
+  [X] "NewsService" fetches 10 Articles with most total clicks during the last
+      week in descending order
+  [X] "NewsController" passes "popular" and "latest" Article lists to the model
+      in each of its GET methods
+
+‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+[012] general : navigation bars, incl. topics and logout
+
+  [X] "fragments/admin_nav.html" navigation bar for all "/admin**.html" pages,
+      with logout hyperlink (use css to stylize submit-button as link)
+  [X] "fragments/news_nav.html" navigation bar for all "/news**.html" pages,
+      listing all Topics as hyperlinks to their respective news pages
+  [X] "NewsController" passes Topics to the model in each of its GET methods
+
+‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
